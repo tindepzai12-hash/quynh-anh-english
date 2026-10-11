@@ -1,0 +1,35 @@
+{
+  "generator": "Blender 4.5.9 LTS",
+  "bones": 15,
+  "meshes": 68,
+  "vertices": 28454,
+  "triangles": 56640,
+  "clips": [
+    "Idle",
+    "Blink",
+    "LookAround",
+    "Happy",
+    "TapReact",
+    "Listening",
+    "Thinking",
+    "Talking",
+    "Celebrate",
+    "Sad",
+    "Sleep",
+    "Wave",
+    "SwitchingSkin"
+  ],
+  "materials": [
+    "OceanBlue",
+    "AquaticTeal",
+    "WarmCream",
+    "EyeIvory",
+    "DeepNavy",
+    "Coral",
+    "FinCoral",
+    "Catchlight",
+    "CheekAqua"
+  ],
+  "identity": "Original aquatic baby dragon; approved Milo reference",
+  "source": "build_justin.py"
+}

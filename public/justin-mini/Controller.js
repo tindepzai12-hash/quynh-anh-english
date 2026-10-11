@@ -1,0 +1,46 @@
+import * as THREE from 'three';
+import {GLTFLoader} from '../vendor/three/addons/loaders/GLTFLoader.js';
+import {JustinMiniStateMachine} from './StateMachine.js';
+import {JustinMiniAnimationController} from './AnimationController.js';
+import {JustinMiniAudioController} from './AudioController.js';
+import {JustinMiniVoiceRepeatManager} from './VoiceRepeatManager.js';
+import {JustinMiniSkinManager} from './SkinManager.js';
+import {STATE_CLIPS,STATUS} from './DataDefinitions.js';
+export class JustinMiniController {
+ constructor(host,options={}){
+  this.host=host;this.options=options;this.state=new JustinMiniStateMachine();this.disposed=false;this.visible=true;this.frame=0;this.level=0;this.timer=null;
+  this.notify=text=>{options.onStatus?.(text,this.state.current);};this.audio=new JustinMiniAudioController();this.voice=new JustinMiniVoiceRepeatManager(this.state,this.audio,this.notify);
+  this.state.addEventListener('change',e=>{this.animation?.play(STATE_CLIPS[e.detail]);this.notify(STATUS[e.detail]);host.dataset.petState=e.detail;});
+  this.visibility=()=>{if(document.hidden){this.voice.cancel();cancelAnimationFrame(this.frame);}else this.loop(performance.now());};document.addEventListener('visibilitychange',this.visibility);
+ }
+ async load(){
+  try{
+   this.renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'low-power'});this.renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));this.renderer.outputColorSpace=THREE.SRGBColorSpace;this.renderer.toneMapping=THREE.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1;this.host.append(this.renderer.domElement);
+   this.scene=new THREE.Scene();this.camera=new THREE.PerspectiveCamera(35,1,.1,50);this.camera.position.set(1.8,2.4,7.2);this.camera.lookAt(.2,1.9,0);
+   this.scene.add(new THREE.HemisphereLight(0xeaf6ff,0x7b94a5,1.4));let key=new THREE.DirectionalLight(0xfff8ec,2.4);key.position.set(-3,5,5);this.scene.add(key);let fill=new THREE.DirectionalLight(0xcceaff,.65);fill.position.set(3,2,4);this.scene.add(fill);let rim=new THREE.DirectionalLight(0xd8f5ff,.8);rim.position.set(4,3,-3);this.scene.add(rim);
+   const gltf=await new GLTFLoader().loadAsync(this.options.modelUrl||'/assets/justin-mini/source-rig/JustinMini.glb');if(this.disposed){this.disposeModel(gltf.scene);return false;}
+   this.model=gltf.scene;this.sourceModel=!!this.model.getObjectByName('Justin_SourceGeometry');this.scene.add(this.model);this.animation=new JustinMiniAnimationController(this.model,gltf.animations);this.skins=new JustinMiniSkinManager(this.model);this.skins.apply(this.options.equipped);
+   if(this.sourceModel){this.fitSource();this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=THREE.PCFSoftShadowMap;key.castShadow=true;key.shadow.mapSize.set(512,512);Object.assign(key.shadow.camera,{left:-2.6,right:2.6,top:4.5,bottom:-.6,near:.1,far:15});key.shadow.bias=-.0005;key.shadow.normalBias=.025;this.model.traverse(o=>{if(o.isMesh)o.castShadow=true;});this.ground=new THREE.Mesh(new THREE.PlaneGeometry(12,12),new THREE.ShadowMaterial({opacity:.065}));this.ground.rotation.x=-Math.PI/2;this.ground.position.y=-.02;this.ground.receiveShadow=true;this.scene.add(this.ground);this.host.dataset.sourceGeometry='311418 vertices / 622824 triangles';}
+   this.animation.play('Idle');
+   this.host.dataset.modelLoaded='true';this.host.dataset.clipCount=String(gltf.animations.length);this.host.querySelector('.pet-fallback')?.remove();
+   this.resize=()=>{if(this.disposed)return;let {width,height}=this.host.getBoundingClientRect();if(width<1||height<1)return;this.renderer.setSize(width,height,false);this.camera.aspect=width/height;this.camera.position.z=this.sourceModel?Math.max(7.2,6.5/this.camera.aspect):this.camera.aspect<1?8.9:7.2;this.camera.lookAt(0,1.72,0);this.camera.updateProjectionMatrix();};this.observer=new ResizeObserver(this.resize);this.observer.observe(this.host);this.resize();
+   this.intersection=new IntersectionObserver(es=>{this.visible=es[0].isIntersecting;if(this.visible&&!document.hidden)this.loop(performance.now());else cancelAnimationFrame(this.frame);});this.intersection.observe(this.host);
+   this.ray=new THREE.Raycaster();this.pointer=new THREE.Vector2();let down=null;
+   this.onDown=e=>{down={x:e.clientX,y:e.clientY,angle:this.model.rotation.y};this.host.setPointerCapture(e.pointerId);};
+   this.onMove=e=>{if(down&&Math.abs(e.clientX-down.x)>8){const yaw=down.angle+(e.clientX-down.x)*.005;this.model.rotation.y=this.options.allowFullRotation?yaw:THREE.MathUtils.clamp(yaw,-.9,.9);}};
+   this.onUp=e=>{if(!down)return;let moved=Math.abs(e.clientX-down.x)+Math.abs(e.clientY-down.y);down=null;if(moved>8)return;let r=this.host.getBoundingClientRect();this.pointer.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);this.ray.setFromCamera(this.pointer,this.camera);let hit=this.ray.intersectObject(this.model,true).find(h=>h.object.visible);if(hit)this.react(this.sourceModel?(hit.point.y>1.65?'head':'body'):/Head|Eye|Pupil|Muzzle|Fin|Brow|Forelock/.test(hit.object.name)?'head':'body');};
+   this.onCancel=()=>{down=null;};this.host.addEventListener('pointercancel',this.onCancel);this.host.addEventListener('pointerdown',this.onDown);this.host.addEventListener('pointermove',this.onMove);this.host.addEventListener('pointerup',this.onUp);this.loop(performance.now());this.notify('Chạm đầu, chạm bụng hoặc kéo nhẹ để xoay Justin.');return true;
+  }catch(e){if(!this.disposed){this.host.dataset.modelLoaded='false';if(this.host.querySelector('.pet-fallback small'))this.host.querySelector('.pet-fallback small').textContent='Thiết bị chưa mở được 3D. Đang dùng hình 2D; giọng nói vẫn hoạt động.';this.notify('Không mở được mô hình 3D trên thiết bị này.');}this.renderer?.dispose();return false;}
+ }
+ fitSource(){this.model.updateMatrixWorld(true);const source=this.model.getObjectByName('Justin_SourceGeometry');const box=new THREE.Box3().setFromObject(source);const size=box.getSize(new THREE.Vector3()),center=box.getCenter(new THREE.Vector3());const scale=3.4/size.y;this.model.scale.setScalar(scale);this.model.position.set(-center.x*scale,-box.min.y*scale,-center.z*scale);this.model.updateMatrixWorld(true);}
+ loop(now){cancelAnimationFrame(this.frame);if(this.disposed||document.hidden||!this.visible)return;if(this.sourceModel&&this.last&&now-this.last<32){this.frame=requestAnimationFrame(t=>this.loop(t));return;}let dt=Math.min(.10,(now-(this.last||now))/1000);this.last=now;this.level=this.voice.level();let reduced=matchMedia('(prefers-reduced-motion: reduce)').matches||document.body.classList.contains('reduce-motion');if(this.animation)this.animation.update(reduced?0:dt,this.level);
+  this.options.onLevel?.(this.level);this.renderer?.render(this.scene,this.camera);this.host.dataset.activeClip=this.animation?.active?.getClip().name||'';this.host.dataset.renderFrames=String((Number(this.host.dataset.renderFrames)||0)+1);if(this.sourceModel){this.host.dataset.renderTriangles=String(this.renderer.info.render.triangles);this.host.dataset.animationTime=this.animation.time.toFixed(2);}this.frame=requestAnimationFrame(t=>this.loop(t));
+ }
+ react(part='head',clip){if(['Listening','Processing','Talking'].includes(this.state.current))return;clearTimeout(this.timer);this.state.transition('Interacting');this.animation?.play(clip||(part==='head'?'Happy':'TapReact'));this.notify(part==='head'?'Hehe, xoa đầu nữa đi!':'Nhột quá! Mình cùng học tiếp nhé.');this.timer=setTimeout(()=>this.state.reset(),1800);}
+ preview(equipped){this.voice.cancel();clearTimeout(this.timer);this.skins?.apply(equipped);this.state.transition('SwitchingSkin');this.timer=setTimeout(()=>this.state.reset(),1200);}
+ sleep(){this.voice.cancel();clearTimeout(this.timer);this.state.transition('Sleeping');}
+ perform(clip){if(!this.animation?.actions.has(clip))return false;this.voice.cancel();clearTimeout(this.timer);if(clip==='Sleep'){this.sleep();return true;}if(clip==='Idle'){this.state.reset();return true;}this.state.transition('Interacting');this.animation.play(clip);this.host.dataset.petState=clip;this.notify('Justin · '+clip);if(!['Breathing','Blink','Listening','Thinking','Talking'].includes(clip))this.timer=setTimeout(()=>this.state.reset(),this.animation.active.getClip().duration*1000);return true;}
+ rotate(yaw){if(this.model&&Number.isFinite(yaw))this.model.rotation.y=yaw;}
+ disposeModel(model){model.traverse(o=>{if(o.isMesh){o.geometry.dispose();for(let m of Array.isArray(o.material)?o.material:[o.material]){for(let v of Object.values(m))if(v?.isTexture)v.dispose();m.dispose();}}});}
+ dispose(){this.disposed=true;cancelAnimationFrame(this.frame);clearTimeout(this.timer);this.voice.dispose();document.removeEventListener('visibilitychange',this.visibility);this.observer?.disconnect();this.intersection?.disconnect();for(let [name,fn] of [['pointercancel',this.onCancel],['pointerdown',this.onDown],['pointermove',this.onMove],['pointerup',this.onUp]])if(fn)this.host.removeEventListener(name,fn);this.animation?.dispose();if(this.model)this.disposeModel(this.model);if(this.ground){this.ground.geometry.dispose();this.ground.material.dispose();}this.renderer?.dispose();this.renderer?.forceContextLoss();this.renderer?.domElement.remove();}
+}
