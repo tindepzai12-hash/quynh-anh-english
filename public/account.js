@@ -27,7 +27,7 @@ async function accountView(mode='login'){
 }
 route=function(){const [screen,mode]=location.hash.slice(1).split('/');if(screen==='account'){cleanup();cleanup=()=>{};document.body.classList.remove('exam-mode','reading-room');document.body.dataset.screen='account';$('.rail').classList.remove('open');if(chatWindow.open)chatWindow.close();$('#page-label').textContent='Tài khoản';accountView(mode||'login')}else accountBaseRoute();document.querySelectorAll('[data-nav]').forEach(a=>{if(a.classList.contains('active'))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')})};
 const accountApi=api;
-api=async function(url,body){const status=$('#save-status');if(body!==undefined&&status)status.textContent='Đang lưu…';try{const value=await accountApi(url,body);if(body!==undefined&&status)status.textContent=accountInfo.user?'Đã lưu vào tài khoản':accountInfo.mode==='cloud'?'Bản xem trước':'Đã lưu trên laptop';return value}catch(e){if(status&&body!==undefined)status.textContent='Chưa lưu · thử lại';throw e}};
+api=async function(url,body){const field=body!==undefined&&['/api/notes','/api/plan','/api/settings'].includes(url)?url.slice(4)+(url==='/api/notes'?':'+body.id:''):null;if(field)body={...body,_fieldVersion:body._fieldVersion??state?._syncVersions?.[field]??0};const status=$('#save-status');if(body!==undefined&&status)status.textContent='Đang lưu…';try{const value=await accountApi(url,body);if(field&&value._syncVersion!==undefined){(state._syncVersions||={})[field]=value._syncVersion;delete value._syncVersion;}if(body!==undefined&&status)status.textContent=accountInfo.user?'Đã lưu vào tài khoản':accountInfo.mode==='cloud'?'Bản xem trước':'Đã lưu trên laptop';return value}catch(e){if(status&&body!==undefined)status.textContent='Chưa lưu · thử lại';throw e}};
 window.addEventListener('offline',()=>{const s=$('#save-status');if(s)s.textContent='Mất kết nối · chưa thể đồng bộ'});
 window.addEventListener('online',()=>{paintAccount();if(catalog&&state)refresh().then(()=>toast('Đã kết nối lại. Tiến trình trên máy chủ đã được tải.')).catch(()=>{})});
 window.addEventListener('unhandledrejection',event=>{if(event.reason instanceof Error){toast(event.reason.message);event.preventDefault()}});
@@ -35,3 +35,5 @@ document.addEventListener('DOMContentLoaded',()=>{loadAccount();if(!$('#account-
 
 let continuityTimer;
 window.addEventListener('hashchange',()=>{clearTimeout(continuityTimer);if(!/^#(lesson|reading|writing|speaking|library|vocab-practice|vocab-matching|vocab-images|vocab-context)(\/|$)/.test(location.hash))return;if(accountInfo.mode==='cloud'&&!accountInfo.user)return;const target=location.hash;continuityTimer=setTimeout(()=>{api('/api/continuity',{route:target}).then(()=>{state.lastRoute=target}).catch(()=>{})},600)});
+
+

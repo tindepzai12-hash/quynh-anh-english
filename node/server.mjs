@@ -23,6 +23,7 @@ const local=cloud?null:new LocalState(process.env.OCEAN_LOCAL_DB||root+'state/le
 const persistent=admin?new CloudState(admin):null;
 if(!cloud&&!process.env.OCEAN_READING_DB)process.env.OCEAN_READING_DB=root+'state/learning-reading-content.sqlite3';
 if(cloud&&!process.env.OCEAN_CATALOG)process.env.OCEAN_CATALOG=root+'deploy/catalog.json';
+if(!cloud&&!process.env.OCEAN_EDITOR_TOKEN&&existsSync(root+'state/editor-token.private.txt'))process.env.OCEAN_EDITOR_TOKEN=readFileSync(root+'state/editor-token.private.txt','utf8').trim();
 const engine=new Engine();await engine.ready;
 const app=express();if(cloud)app.set('trust proxy',1);
 app.disable('x-powered-by');
@@ -40,11 +41,11 @@ app.use(async(req,res,next)=>{try{req.session=await getIronSession(req,res,optio
 function authClient(session,token){
   return createClient(process.env.SUPABASE_URL,process.env.SUPABASE_ANON_KEY,{global:token?{headers:{Authorization:`Bearer ${token}`}}:{},auth:{flowType:'pkce',persistSession:false,autoRefreshToken:false,detectSessionInUrl:false,storage:{getItem:key=>session.oauthStorage?.[key]||null,setItem:(key,value)=>{session.oauthStorage||={};session.oauthStorage[key]=value},removeItem:key=>{delete session.oauthStorage?.[key]}}}});
 }
-async function saveAuth(session,auth){session.access=auth.access_token;session.refresh=auth.refresh_token;session.expires=auth.expires_at;session.authAt=Date.now();delete session.oauthStorage;await session.save()}
+async function saveAuth(session,auth,recent=true){session.access=auth.access_token;session.refresh=auth.refresh_token;session.expires=auth.expires_at;if(recent)session.authAt=Date.now();delete session.oauthStorage;await session.save()}
 async function identify(req){
   if(!configured||!req.session.access)return null;
   let access=req.session.access;
-  if((req.session.expires||0)*1000<Date.now()+30000){const {data,error}=await authClient({}).auth.refreshSession({refresh_token:req.session.refresh});if(error||!data.session){req.session.destroy();return null}await saveAuth(req.session,data.session);access=data.session.access_token}
+  if((req.session.expires||0)*1000<Date.now()+30000){const {data,error}=await authClient({}).auth.refreshSession({refresh_token:req.session.refresh});if(error||!data.session){req.session.destroy();return null}await saveAuth(req.session,data.session,false);access=data.session.access_token}
   const {data,error}=await authClient({}).auth.getUser(access);if(error||!data.user){req.session.destroy();return null}return data.user;
 }
 const publicUser=u=>u?{id:u.id,email:u.email,name:u.user_metadata?.display_name||u.user_metadata?.full_name||'',verified:!!u.email_confirmed_at,providers:(u.identities||[]).map(i=>i.provider)}:null;
@@ -70,17 +71,21 @@ app.post('/auth/export',async(req,res)=>{const user=await identify(req);const ro
 app.post('/auth/delete-account',requireConfigured,async(req,res)=>{const user=await identify(req);if(!user||req.body.confirm!=='DELETE'||Date.now()-req.session.authAt>5*60*1000)return res.status(403).json({error:'Đăng nhập lại và xác nhận xóa tài khoản trước.'});const {error}=await admin.auth.admin.deleteUser(user.id);if(error)throw Error('Chưa xóa được tài khoản.');req.session.destroy();res.json({ok:true})});
 
 app.use('/api',async(req,res)=>{
-  if(req.path.startsWith('/reading-admin/'))return res.status(403).json({error:'Studio nguồn chỉ mở trên máy cá nhân có khóa quản trị.'});
+  if(cloud&&req.path.startsWith('/reading-admin/'))return res.status(403).json({error:'Studio nguồn chỉ mở trên máy cá nhân có khóa quản trị.'});
   const user=await identify(req);
   const readonly=['/catalog','/state','/ai-status','/knowledge-status','/reading-list'].includes(req.path)&&req.method==='GET';
   if(cloud&&!user&&!readonly)return res.status(configured?401:503).json({error:configured?'Đăng nhập để lưu và học tiếp.':'Đồng bộ tài khoản chưa kết nối. Bản online chỉ xem trước; tiến trình trên máy vẫn được giữ.'});
   const id=user?.id||'local-guest';
   await ownerQueue(id,async()=>{
     const row=user?await persistent.read(user.id):local?await local.read():{body:freshState()};
-    const result=await engine.call(req.originalUrl,req.method,row.body,req.body);
+    const field=req.method==='POST'&&['/notes','/plan','/settings'].includes(req.path)?req.path+(req.path==='/notes'?':'+req.body.id:''):null;
+    const previousVersion=field?row.body._fieldVersions?.[field]||0:0;
+    if(field&&(user||req.body._fieldVersion!==undefined)&&req.body._fieldVersion!==previousVersion)return res.status(409).json({error:'Nội dung vừa đổi ở thiết bị khác. Bản bạn đang viết chưa được ghi đè; tải lại và so sánh trước khi lưu.',code:'FIELD_CONFLICT',version:previousVersion});
+    const result=await engine.call(req.originalUrl,req.method,row.body,req.body,!cloud?req.get('authorization'):undefined);
+    if(field&&result.status<400&&result.state){(result.state._fieldVersions||={})[field]=previousVersion+1;if(result.data&&typeof result.data==='object')result.data._syncVersion=previousVersion+1}
     if(result.state&&result.status<500){if(user)await persistent.write(user.id,result.state,row.version);else if(local)await local.write(result.state)}
     if(cloud&&!user&&req.path==='/catalog'){result.data.readingContent=[];result.data.quizzes={}}
-    if(req.path==='/state'&&result.data){delete result.data.guestBackups;delete result.data.guestImports}
+    if(req.path==='/state'&&result.data){result.data._syncVersions=result.state?._fieldVersions||{};delete result.data._fieldVersions;delete result.data.guestBackups;delete result.data.guestImports}
     res.status(result.status).json(result.data);
   });
 });

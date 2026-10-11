@@ -15,10 +15,10 @@ export class Engine {
     this.child.on('error',()=>this.fail());this.child.on('exit',()=>this.fail());
   }
   fail(){const error=Error('Máy xử lý bài học chưa sẵn sàng.');this.rejectReady(error);for(const p of this.pending.values()){clearTimeout(p.timer);p.reject(error)}this.pending.clear()}
-  async call(path,method,state,body){
+  async call(path,method,state,body,authorization){
     const execute=async()=>{await this.ready;const id=randomUUID();return new Promise((resolve,reject)=>{
       const timer=setTimeout(()=>{this.pending.delete(id);reject(Error('Yêu cầu chưa hoàn tất; tiến trình cũ vẫn được giữ.'));this.child.kill()},90000);
-      this.pending.set(id,{resolve,reject,timer});this.child.stdin.write(JSON.stringify({id,path,method,state,body})+'\n');
+      this.pending.set(id,{resolve,reject,timer});this.child.stdin.write(JSON.stringify({id,path,method,state,body,authorization})+'\n');
     })};
     const result=this.queue.then(execute);this.queue=result.catch(()=>{});return result;
   }

@@ -10,7 +10,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 scratch=tempfile.TemporaryDirectory(prefix='quynh-anh-engine-')
 os.environ['OCEAN_DB']=str(Path(scratch.name)/'learning.sqlite3')
-os.environ.pop('OCEAN_EDITOR_TOKEN',None)
+if os.environ.get('RENDER') or os.environ.get('APP_MODE')=='cloud':os.environ.pop('OCEAN_EDITOR_TOKEN',None)
 import server
 from types import SimpleNamespace
 seed=ROOT/'deploy'/'reading-seed.json'
@@ -25,7 +25,7 @@ class Request(server.Handler):
 
 def execute(message):
     route=message['path']
-    if not route.startswith('/api/') or route.startswith('/api/reading-admin/'):
+    if not route.startswith('/api/') or (route.startswith('/api/reading-admin/') and (os.environ.get('RENDER') or os.environ.get('APP_MODE')=='cloud')):
         return dict(status=403,data={'error':'Không có quyền truy cập.'},state=message['state'])
     with closing(sqlite3.connect(server.DB)) as db, db:
         db.execute('UPDATE state SET body=? WHERE id=1',(json.dumps(message['state'],ensure_ascii=False),))
@@ -34,6 +34,7 @@ def execute(message):
     body=json.dumps(message.get('body',{})).encode()
     request.path=route
     request.headers={'Host':'127.0.0.1:8765','Content-Length':str(len(body))}
+    if message.get('authorization'):request.headers['Authorization']=message['authorization']
     request.rfile=io.BytesIO(body)
     request.result=None
     if message['method']=='GET': request.do_GET()
