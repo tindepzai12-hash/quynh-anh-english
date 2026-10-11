@@ -4,7 +4,7 @@ const accountBaseRoute=route;
 async function accountRequest(path,body){const response=await fetch(path,body===undefined?{}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const result=await response.json();if(!response.ok)throw Error(result.error||'Chưa hoàn tất thao tác tài khoản.');return result}
 async function loadAccount(){try{accountInfo=await accountRequest('/auth/session')}catch{accountInfo={configured:false,mode:'local',user:null,legacy:true}}accountReady=true;paintAccount();return accountInfo}
 function paintAccount(){
- const avatar=$('.profile .avatar');if(avatar){avatar.href='#account';avatar.setAttribute('aria-label',accountInfo.user?'Tài khoản và tiến trình':'Đăng nhập và bảo vệ tiến trình');avatar.textContent=accountInfo.user?(accountInfo.user.name||accountInfo.user.email).slice(0,2).toUpperCase():'QA'}
+ $('#online-toggle')?.setAttribute('aria-label',state?.onlineStatus?.enabled?'Tắt ghi nhận thời gian học':'Bật ghi nhận thời gian học');$('#menu').setAttribute('aria-expanded',String($('.rail').classList.contains('open')));const avatar=$('.profile .avatar');if(avatar){avatar.href='#account';avatar.setAttribute('aria-label',accountInfo.user?'Tài khoản và tiến trình':'Đăng nhập và bảo vệ tiến trình');avatar.textContent=accountInfo.user?(accountInfo.user.name||accountInfo.user.email).slice(0,2).toUpperCase():'QA'}
  let status=$('#save-status');if(!status){status=document.createElement('span');status.id='save-status';status.setAttribute('role','status');status.setAttribute('aria-live','polite');$('.topbar').append(status)}
  status.textContent=accountInfo.user?'Đồng bộ tài khoản':accountInfo.mode==='cloud'?'Bản xem trước · chưa lưu cloud':'Lưu trên laptop';
  $('footer').textContent='học tiếng anh cùng bé iu QUỲNH ANH · '+(accountInfo.user?'Tiến trình gắn với tài khoản của bạn':accountInfo.mode==='cloud'?'Kết nối tài khoản để học và lưu tiến trình':'Tiến trình cá nhân lưu trên laptop này');
@@ -32,10 +32,12 @@ api=async function(url,body){const field=body!==undefined&&['/api/notes','/api/p
 window.addEventListener('offline',()=>{const s=$('#save-status');if(s)s.textContent='Mất kết nối · chưa thể đồng bộ'});
 window.addEventListener('online',()=>{paintAccount();if(catalog&&state)refresh().then(()=>toast('Đã kết nối lại. Tiến trình trên máy chủ đã được tải.')).catch(()=>{})});
 window.addEventListener('unhandledrejection',event=>{if(event.reason instanceof Error){toast(event.reason.message);event.preventDefault()}});
-document.addEventListener('DOMContentLoaded',()=>{loadAccount();if(!$('#account-nav')){const a=document.createElement('a');a.id='account-nav';a.href='#account';a.dataset.nav='account';a.innerHTML=icon('settings')+'<span>Tài khoản</span>';$('.rail nav').append(a)}});
+document.addEventListener('DOMContentLoaded',()=>{loadAccount();if(!$('#account-nav')){const a=document.createElement('a');a.id='account-nav';a.setAttribute('aria-label','Tài khoản');a.href='#account';a.dataset.nav='account';a.innerHTML=icon('settings')+'<span>Tài khoản</span>';$('.rail nav').append(a)}});
 
 let continuityTimer;
 window.addEventListener('hashchange',()=>{clearTimeout(continuityTimer);if(!/^#(lesson|reading|writing|speaking|library|vocab-practice|vocab-matching|vocab-images|vocab-context)(\/|$)/.test(location.hash))return;if(accountInfo.mode==='cloud'&&!accountInfo.user)return;const target=location.hash;continuityTimer=setTimeout(()=>{api('/api/continuity',{route:target}).then(()=>{state.lastRoute=target}).catch(()=>{})},600)});
 
 
 
+
+$('#menu').addEventListener('click',()=>$('#menu').setAttribute('aria-expanded',String($('.rail').classList.contains('open'))));
