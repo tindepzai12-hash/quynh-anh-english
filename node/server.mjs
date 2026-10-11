@@ -7,6 +7,7 @@ import {randomBytes,timingSafeEqual} from 'node:crypto';
 import {mkdirSync,existsSync,readFileSync,writeFileSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import {Engine} from './engine.mjs';
+import {authClient} from './auth-client.mjs';
 import {LocalState,CloudState,freshState,mergeGuest} from './state.mjs';
 
 const root=fileURLToPath(new URL('../',import.meta.url));
@@ -38,9 +39,6 @@ app.use('/auth',rateLimit({windowMs:15*60*1000,limit:40,standardHeaders:'draft-8
 const options={password:secret,cookieName:cloud?'__Host-qa-session':'qa-session',ttl:60*60*24*7,cookieOptions:{secure:cloud,httpOnly:true,sameSite:'lax',path:'/'}};
 app.use(async(req,res,next)=>{try{req.session=await getIronSession(req,res,options);next()}catch{next(Error('Không mở được phiên đăng nhập.'))}});
 
-function authClient(session,token){
-  return createClient(process.env.SUPABASE_URL,process.env.SUPABASE_ANON_KEY,{global:token?{headers:{Authorization:`Bearer ${token}`}}:{},auth:{flowType:'pkce',persistSession:false,autoRefreshToken:false,detectSessionInUrl:false,storage:{getItem:key=>session.oauthStorage?.[key]||null,setItem:(key,value)=>{session.oauthStorage||={};session.oauthStorage[key]=value},removeItem:key=>{delete session.oauthStorage?.[key]}}}});
-}
 async function saveAuth(session,auth,recent=true){
   if(recent){const sid=randomBytes(32).toString('hex');const {error}=await admin.from('account_sessions').insert({id:sid,user_id:auth.user.id,expires_at:new Date(Date.now()+7*24*60*60*1000).toISOString()});if(error)throw Error('Chưa tạo được phiên đăng nhập an toàn.');session.sid=sid;session.authAt=Date.now()}
   session.access=auth.access_token;session.refresh=auth.refresh_token;session.expires=auth.expires_at;delete session.oauthStorage;await session.save();
