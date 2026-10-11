@@ -1,4 +1,5 @@
 :root{--motion-quick:120ms;--motion-normal:200ms;--motion-ease:cubic-bezier(.2,0,0,1)}
+[hidden]{display:none!important}
 .button,.pill,.icon-button,input,select,textarea{transition:background-color var(--motion-quick),border-color var(--motion-quick),box-shadow var(--motion-quick),transform var(--motion-quick)}
 .button:active:not(:disabled),.icon-button:active{transform:translateY(1px)}
 button:disabled,.unavailable{opacity:.55;cursor:not-allowed;pointer-events:none}
