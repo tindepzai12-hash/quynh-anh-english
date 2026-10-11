@@ -4,7 +4,7 @@
 .button:active:not(:disabled),.icon-button:active{transform:translateY(1px)}
 button:disabled,.unavailable{opacity:.55;cursor:not-allowed;pointer-events:none}
 :where(button,a,input,select,textarea,summary):focus-visible{outline:3px solid #0a72dc;outline-offset:3px}
-.progressbar>span{transition:width 240ms var(--motion-ease)}
+.progressbar>span{transition:none}
 [aria-busy=true]{cursor:progress}
 #save-status{font-size:11px;color:#536b86;white-space:nowrap;margin-left:8px}
 #connection-banner{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:12px 28px;background:#eef6ff;border-bottom:1px solid #cfe2f6;color:#234d77;font-size:13px}
@@ -34,3 +34,4 @@ button:disabled,.unavailable{opacity:.55;cursor:not-allowed;pointer-events:none}
 .pet-reactions{flex-wrap:wrap;gap:8px}.pet-reactions [hidden],.justin-corner [hidden]{display:none!important}
 @keyframes pet-dream{50%{transform:translateY(-12px);opacity:.45}}
 @media(prefers-reduced-motion:reduce){.justin-corner .sleep-cloud{animation:none!important}}
+.wardrobe-filter{max-width:250px;margin:18px 0}.wardrobe-filter select{width:100%;min-height:44px}.outfit-thumbnail{width:82px;height:100px;object-fit:contain;border-radius:12px;background:#f2f7fb}.wardrobe-item:focus-within{outline:2px solid #087cff;outline-offset:3px}.preview-notice{max-width:260px;line-height:1.5}.justin-corner[data-theme="nature"]{background:#e9f7f3}.justin-corner[data-theme="ice"]{background:#eaf3fc}.justin-corner[data-theme="fire"]{background:#fff1e8}.justin-corner[data-theme="storm"]{background:#dce7f4}.justin-corner[data-theme="storm"] .corner-rug{background:#b4c9df}.justin-corner[data-decor="lamp"]{box-shadow:inset -40px -25px 90px #ffe1a654}.corner-decor{filter:drop-shadow(0 5px 3px #24445d25);pointer-events:none}.corner-decor::after{content:"";display:block;height:6px;width:85%;margin:-4px auto 0;border-radius:50%;background:#2b486b1c}.pet-reactions .pill{min-height:44px}.justin-ball:focus-visible{outline:3px solid #174e89;outline-offset:4px}@media(max-width:650px){.pet-reactions{gap:5px}.pet-reactions .pill{min-height:44px;padding:7px 9px}.justin-corner{min-height:490px}.justin-stage{bottom:115px}.corner-rug{bottom:124px}.corner-decor{bottom:130px}.outfit-thumbnail{width:65px;height:82px}.preview-notice{top:58px;right:12px;max-width:65%;font-size:10px}.justin-game-score{top:110px;left:15px}}

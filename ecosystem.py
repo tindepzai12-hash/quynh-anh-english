@@ -19,6 +19,10 @@ SHOP=[
     dict(id='space', name='Nhà thám hiểm nhỏ', category='outfit', price=65, art='space', detail='Bộ đồ sáng màu cùng ba lô của nhà thám hiểm.'),
     dict(id='pajamas', name='Giấc ngủ dịu êm', category='outfit', price=0, art='pajamas', detail='Áo xanh bạc hà và quần ngủ. Quà tặng miễn phí cho bạn nhỏ.'),
     dict(id='sport', name='Cùng chơi ngoài trời', category='outfit', price=40, art='sport', detail='Áo cam san hô, quần xanh cho buổi chơi bắt bóng.'),
+    dict(id='room-nature', name='Vườn bên cửa sổ', category='background', price=0, art='nature', detail='Khung cảnh thiên nhiên và tông phòng xanh dịu. Quà tặng miễn phí.'),
+    dict(id='room-ice', name='Sáng trên đảo băng', category='background', price=35, art='ice', detail='Đảo băng ngoài cửa sổ, căn phòng xanh mát.'),
+    dict(id='room-fire', name='Chiều trên đảo lửa', category='background', price=35, art='fire', detail='Đảo lửa ngoài cửa sổ, căn phòng màu đào ấm.'),
+    dict(id='room-storm', name='Đêm trên đảo sấm', category='background', price=35, art='thunder', detail='Đảo sấm ngoài cửa sổ, căn phòng xanh chạng vạng. Không chớp sáng.'),
 ]
 
 def day(now): return datetime.fromtimestamp(now, TAIPEI).date().isoformat()
@@ -28,6 +32,7 @@ def ensure(s):
     for k,v in dict(balance=0, ledger=[], rewards={}, days=[], receipts={}, inventory={'berry':3}, equipped={}, mood='happy', fed=0).items():
         e.setdefault(k,v)
     e['inventory'].setdefault('pajamas',1)
+    e['inventory'].setdefault('room-nature',1)
     e.setdefault('voice',dict(mode='raw',speed=1.22,volume=.8))
     s.setdefault('writingDrafts',{}); s.setdefault('writingSubmissions',[])
     s.setdefault('speakingSessions',[]); s.setdefault('timestampNotes',{})
@@ -97,7 +102,7 @@ def pet_action(s,body,now):
     elif action=='rest': e['mood']='sleepy'
     elif action=='remove':
         category=body.get('category')
-        if category not in ('skin','outfit','hat','decor'): raise ValueError('Loại vật phẩm không hợp lệ')
+        if category not in ('skin','outfit','hat','decor','background'): raise ValueError('Loại vật phẩm không hợp lệ')
         e['equipped'].pop(category,None); e['mood']='happy'
     elif action in ('buy','use'):
         if not item: raise ValueError('Vật phẩm không tồn tại')

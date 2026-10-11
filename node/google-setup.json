@@ -1,0 +1,11 @@
+{
+  "siteUrl": "https://quynh-anh-english.onrender.com",
+  "webOrigins": ["https://quynh-anh-english.onrender.com", "http://127.0.0.1:8765"],
+  "appCallbacks": ["https://quynh-anh-english.onrender.com/auth/callback", "http://127.0.0.1:8765/auth/callback"],
+  "supabaseCallbackTemplate": "https://<project-ref>.supabase.co/auth/v1/callback",
+  "googleApplicationType": "Web application",
+  "enabled": false,
+  "activationFlag": "GOOGLE_OAUTH_ENABLED",
+  "credentialsDestination": "Supabase Auth > Sign In / Providers > Google",
+  "notes": "The Google client secret belongs in Supabase provider settings, never frontend or GitHub. Enable the Render flag only after provider setup and a real sign-in check."
+}
