@@ -20,7 +20,7 @@ catalog['quizzes']={}
 with sqlite3.connect(ROOT/'state'/'learning-reading-content.sqlite3') as db:
     rows=db.execute('SELECT id,version,status,body,issues,updated FROM reading_content').fetchall()
 (deploy/'reading-seed.json').write_text(json.dumps(rows,ensure_ascii=False),encoding='utf-8')
-(TARGET/'.gitignore').write_text('node_modules/\nstate/\n.env*\n!.env.example\n__pycache__/\n',encoding='utf-8')
+(TARGET/'.gitignore').write_text('node_modules/\nstate/\n.env*\n!.env.example\n__pycache__/\npublic/assets/justin-mini/natural-v2/\n',encoding='utf-8')
 (TARGET/'render.yaml').write_text('''services:
   - type: web
     name: quynh-anh-english

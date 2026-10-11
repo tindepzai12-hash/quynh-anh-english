@@ -15,8 +15,10 @@ SHOP=[
     dict(id='lagoon', name='Ánh xanh đầm phá', category='skin', price=50, art='lagoon', detail='Tông xanh ngọc, giữ nguyên tạo hình Justin.'),
     dict(id='plant', name='Góc cây xanh', category='decor', price=25, art='plant', detail='Một chậu cây đặt cạnh góc đọc sách.'),
     dict(id='lamp', name='Đèn đọc sách', category='decor', price=35, art='lamp', detail='Ánh sáng ấm cho căn phòng.'),
-    dict(id='school', name='Bạn nhỏ đến lớp', category='outfit', price=55, art='school', detail='Ba lô san hô cùng quai kem, dựng bằng mesh 3D.'),
-    dict(id='space', name='Nhà thám hiểm nhỏ', category='outfit', price=65, art='space', detail='Đai và vòng tay phi hành gia, giữ nguyên mặt Justin.'),
+    dict(id='school', name='Bạn nhỏ đến lớp', category='outfit', price=55, art='school', detail='Áo vàng, quần xanh và ba lô nhỏ, đủ bộ đến lớp.'),
+    dict(id='space', name='Nhà thám hiểm nhỏ', category='outfit', price=65, art='space', detail='Bộ đồ sáng màu cùng ba lô của nhà thám hiểm.'),
+    dict(id='pajamas', name='Giấc ngủ dịu êm', category='outfit', price=0, art='pajamas', detail='Áo xanh bạc hà và quần ngủ. Quà tặng miễn phí cho bạn nhỏ.'),
+    dict(id='sport', name='Cùng chơi ngoài trời', category='outfit', price=40, art='sport', detail='Áo cam san hô, quần xanh cho buổi chơi bắt bóng.'),
 ]
 
 def day(now): return datetime.fromtimestamp(now, TAIPEI).date().isoformat()
@@ -25,6 +27,7 @@ def ensure(s):
     e=s.setdefault('ecosystem',{})
     for k,v in dict(balance=0, ledger=[], rewards={}, days=[], receipts={}, inventory={'berry':3}, equipped={}, mood='happy', fed=0).items():
         e.setdefault(k,v)
+    e['inventory'].setdefault('pajamas',1)
     e.setdefault('voice',dict(mode='raw',speed=1.22,volume=.8))
     s.setdefault('writingDrafts',{}); s.setdefault('writingSubmissions',[])
     s.setdefault('speakingSessions',[]); s.setdefault('timestampNotes',{})
