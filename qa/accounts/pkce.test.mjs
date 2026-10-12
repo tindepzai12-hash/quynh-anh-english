@@ -4,9 +4,9 @@ import {authClient} from '../../node/auth-client.mjs';
 process.env.SUPABASE_URL='https://qa-fixture.supabase.co';
 process.env.SUPABASE_ANON_KEY='qa-placeholder';
 
-test('PKCE verifier survives separate HTTP clients without storing full SDK sessions',async()=>{
+for(const provider of ['google','facebook'])test(provider+' PKCE verifier survives separate HTTP clients without storing full SDK sessions',async()=>{
  const cookie={};
- const start=await authClient(cookie).auth.signInWithOAuth({provider:'google',options:{redirectTo:'http://127.0.0.1/auth/callback',skipBrowserRedirect:true}});
+ const start=await authClient(cookie).auth.signInWithOAuth({provider,options:{redirectTo:'http://127.0.0.1/auth/callback',skipBrowserRedirect:true}});
  assert.equal(start.error,null);
  assert.ok(new URL(start.data.url).searchParams.get('code_challenge'));
  const entries=Object.entries(cookie.oauthStorage||{});
