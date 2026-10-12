@@ -1876,5 +1876,329 @@
     "reviewed": true,
     "alt": "Minh họa A desk job: a job in an office, where you sit and work all day at a table or desk",
     "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "d714b63bae8550a0ae69": {
+    "src": "assets/vocab/cards/ae446bee9cfd5e59.webp",
+    "reviewed": true,
+    "alt": "Minh họa a tachograph: a device used to measure the speed of trucks and to record the times when a driver has stopped to rest",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "bebf72b103fb841ec940": {
+    "src": "assets/vocab/cards/e973d087b0bcc943.webp",
+    "reviewed": true,
+    "alt": "Minh họa Labor productivity: the rate at which a worker, a company or a country produces goods, and the amount produced, compared with how much time, work and money is needed to produce them",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "f03f4f13c1a41755a218": {
+    "src": "assets/vocab/cards/6378a580a9a8fa5a.webp",
+    "reviewed": true,
+    "alt": "Minh họa Aretirement package: the money or other benefits that you receive from a company or organization when you stop working there because of your age",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "6e00e7f62d6725841570": {
+    "src": "assets/vocab/cards/bdd53df3335a53f4.webp",
+    "reviewed": true,
+    "alt": "Minh họa Job prospects: the chances of being successful and having more opportunities at work",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "69cd3abe0834fa55b6ba": {
+    "src": "assets/vocab/cards/3dea9b827068ad4d.webp",
+    "reviewed": true,
+    "alt": "Minh họa To take a career break: a period of time when you do not do your usual job, for example because you have children to care for",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "cf3ab6d3592b6e93c28f": {
+    "src": "assets/vocab/cards/5b6bd35f82c3efd6.webp",
+    "reviewed": true,
+    "alt": "Minh họa Working environment: the conditions that you work in",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "dc0afba033b82ae26e12": {
+    "src": "assets/vocab/cards/50ec0c06e0d14626.webp",
+    "reviewed": true,
+    "alt": "Minh họa Supportive work colleagues: people that you work with who give you help and encouragement",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "142ab604ecb661d8923f": {
+    "src": "assets/vocab/cards/75456ff3fa472a57.webp",
+    "reviewed": true,
+    "alt": "Minh họa Labour-intensive: (of work) needing a lot of people to do it",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "929e24201c687a1e8a72": {
+    "src": "assets/vocab/cards/8e0ae56e0ce20531.webp",
+    "reviewed": true,
+    "alt": "Minh họa An internship: a period of time in which a student or new graduate gets practical experience in a job",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "372506c951cdd6417c6e": {
+    "src": "assets/vocab/cards/836706096db8cbca.webp",
+    "reviewed": true,
+    "alt": "Minh họa to throw a tantrum: to become very angry and unreasonable",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "89e30f98a84db537c72e": {
+    "src": "assets/vocab/cards/990ca38b066b0eae.webp",
+    "reviewed": true,
+    "alt": "Minh họa to hear something through the grapevine: to hear news from someone who heard that news from someone else, to learn of something i nformally and unofficially by means of gossip or rumor.",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "3212c05def4063667cfe": {
+    "src": "assets/vocab/cards/f426a08be2ef528a.webp",
+    "reviewed": true,
+    "alt": "Minh họa to marshal facts: to organise facts in support of an idea",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "17886328fe218717601d": {
+    "src": "assets/vocab/cards/85cc4850c5198179.webp",
+    "reviewed": true,
+    "alt": "Minh họa Minimum wage: the lowest wage that an employer is allowed to pay by law",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "a237351c2ecc1fde9f11": {
+    "src": "assets/vocab/cards/5dfe999c0174a415.webp",
+    "reviewed": true,
+    "alt": "Minh họa Working mothers: Mothers who have to go out to work as well as to look after children",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "38e23520d77aa41f80f3": {
+    "src": "assets/vocab/cards/0be54c6f8ab87f76.webp",
+    "reviewed": true,
+    "alt": "Minh họa Sick leave: permission to stay away from work because of illness or injury",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "992a43db7433f9c3f099": {
+    "src": "assets/vocab/cards/c1679e4762b17027.webp",
+    "reviewed": true,
+    "alt": "Minh họa To move up the career ladder: a series of stages by which you can make progress in your career",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "2d5cb178f54864f39193": {
+    "src": "assets/vocab/cards/281928f5b4825a70.webp",
+    "reviewed": true,
+    "alt": "Minh họa Job satisfaction: the good feeling that you get when you have a job that you enjoy",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "fd0cb1de4a232a2170d9": {
+    "src": "assets/vocab/cards/0eb163529f0dcb00.webp",
+    "reviewed": true,
+    "alt": "Minh họa To dismiss somebody (from something): to officially remove somebody from their job",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "d8bc973459265137cf4b": {
+    "src": "assets/vocab/cards/819054fa06720bba.webp",
+    "reviewed": true,
+    "alt": "Minh họa a clash of personalities: a situation in which two people disagree because they have very different personalities",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "8cbd42cb594acc0d4235": {
+    "src": "assets/vocab/cards/dbb4fecfcbffbcba.webp",
+    "reviewed": true,
+    "alt": "Minh họa to have a superiority complex: to have a feeling that one is superior to others",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "3cb26b8a8321b18705fa": {
+    "src": "assets/vocab/cards/a57b43d23c16032f.webp",
+    "reviewed": true,
+    "alt": "Minh họa codes of conduct: voluntary rules which people accept in a situation",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "f441fffb25aeb98a5aa4": {
+    "src": "assets/vocab/cards/93dbc65729ac08c7.webp",
+    "reviewed": true,
+    "alt": "Minh họa to assimilate knowledge: to absorb and understand knowledge",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "1d1912134bf24e968181": {
+    "src": "assets/vocab/cards/fdcef96f7a9f1b9f.webp",
+    "reviewed": true,
+    "alt": "Minh họa to live in harmony with one another: to live with others in a way which avoids conflict or disagreement",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "ee0dc60aa01c64b96ec8": {
+    "src": "assets/vocab/cards/21e847760fe2bf11.webp",
+    "reviewed": true,
+    "alt": "Minh họa set in his or her ways: A person who is set in his or her ways is stubborn and committed to their current way of doing things. They aren’t open to changing, even if the change would be an improvement",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "7986fb59d6d97f9f7cfa": {
+    "src": "assets/vocab/cards/246ef867fd298b8b.webp",
+    "reviewed": true,
+    "alt": "Minh họa social networking sites: a website on which you communicate with people who share your interests",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "2be11b11029187ba1f69": {
+    "src": "assets/vocab/cards/7f3b06ad13e0b787.webp",
+    "reviewed": true,
+    "alt": "Minh họa A heavy workload: a lot of work that an individual employee has to perform",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "1abdce0ed1b138fde783": {
+    "src": "assets/vocab/cards/382fd7a83a0556c2.webp",
+    "reviewed": true,
+    "alt": "Minh họa To have a steady job: to have a job which you are unlikely to lose, but which is usually the same routine",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "21a248bbf163fd683a1c": {
+    "src": "assets/vocab/cards/32247475a6322f06.webp",
+    "reviewed": true,
+    "alt": "Minh họa to hide one’s light under a bushel: to conceal one’s talents and skills",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "c041a5ea5bfb761990a6": {
+    "src": "assets/vocab/cards/0311a332ac73407c.webp",
+    "reviewed": true,
+    "alt": "Minh họa to stamp one’s mark on sth: to affect or change something in a way that allows people to recognize one’s influence",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "e65822ccd28f422a4cf0": {
+    "src": "assets/vocab/cards/460cc53b9b5c64c6.webp",
+    "reviewed": true,
+    "alt": "Minh họa to act one’s age: to behave in a way suitable for someone as old as you are",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "f3fc2bbb25dc720d6196": {
+    "src": "assets/vocab/cards/7b09cf764fad6966.webp",
+    "reviewed": true,
+    "alt": "Minh họa to be a team player: a person who willingly cooperates with others",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "fc619195a97fd4cdcce9": {
+    "src": "assets/vocab/cards/bd250512c667e44d.webp",
+    "reviewed": true,
+    "alt": "Minh họa the downfall of communication: the decline of communication",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "c64dce34df291aa14dea": {
+    "src": "assets/vocab/cards/774129c03ce23e9d.webp",
+    "reviewed": true,
+    "alt": "Minh họa a breakdown in communication: a misunderstanding which results from people failing to discuss and resolve something",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "9e51518157f1249c9808": {
+    "src": "assets/vocab/cards/5beb7e075f88fbe7.webp",
+    "reviewed": true,
+    "alt": "Minh họa to accelerate the flow of information: to spread information with a higher speed to create faster response times and more accurate interactions",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "90f4c5917ab67fa31d65": {
+    "src": "assets/vocab/cards/c15edcf3bf0745a5.webp",
+    "reviewed": true,
+    "alt": "Minh họa behind the times: refers to a person who is old -fashioned and has not adopted certain modern customs, beliefs, or behaviors",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "741c744481b3517b1dfc": {
+    "src": "assets/vocab/cards/20b69b579b3af252.webp",
+    "reviewed": true,
+    "alt": "Minh họa a stickler for sth: Someone who is a “stickler for something” is a person who strongly insists on that quality or behavior, and wants or expects other people to maintain the same standard",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "0643c613754641716818": {
+    "src": "assets/vocab/cards/4794cb6ccdf32ad5.webp",
+    "reviewed": true,
+    "alt": "Minh họa to be user-friendly: to be easy to use, without a need for advanced skills",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "9384bcdaa940fc48041d": {
+    "src": "assets/vocab/cards/ae69fc965dc93329.webp",
+    "reviewed": true,
+    "alt": "Minh họa to reach a stalemate/to reach deadlock: a disagreement in which neither side is able to find a solution",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "2746e7a7f4f461181c3e": {
+    "src": "assets/vocab/cards/9bf558dab0203b02.webp",
+    "reviewed": true,
+    "alt": "Minh họa to have a laid-back attitude: relaxed, not worrying about anything",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "21dc03fbae84252771b5": {
+    "src": "assets/vocab/cards/e99d77229d94ef0f.webp",
+    "reviewed": true,
+    "alt": "Minh họa to see the big picture: to understand all the important aspects of a situation",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "06ffcd76428341fe3d91": {
+    "src": "assets/vocab/cards/0a0e049ecf58c89c.webp",
+    "reviewed": true,
+    "alt": "Minh họa to make small talk/to exchange pleasantries: to talk in a polite way about unimportant matters such as the weather",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "4e14867fb1a63d390dbb": {
+    "src": "assets/vocab/cards/e09aa712a0b3a616.webp",
+    "reviewed": true,
+    "alt": "Minh họa to be tough on crime: To punish crime severely",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "1d64cd3248c20840fb38": {
+    "src": "assets/vocab/cards/456e88a5e498e13b.webp",
+    "reviewed": true,
+    "alt": "Minh họa to keep abreast of something: to have the most recent information about something",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "030624fceb3413e2548a": {
+    "src": "assets/vocab/cards/2f822ab48707e7bd.webp",
+    "reviewed": true,
+    "alt": "Minh họa a social butterfly: refers to an extroverted person who loves to socialize",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "92ad09ea0b839f54f59d": {
+    "src": "assets/vocab/cards/2fde6f3644c20424.webp",
+    "reviewed": true,
+    "alt": "Minh họa to break off a relationship/to break off negotiations: to end something suddenly",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "fb78f32cc54036502be2": {
+    "src": "assets/vocab/cards/91d7b25e0f77c1b3.webp",
+    "reviewed": true,
+    "alt": "Minh họa to have social skills: to have the personal skills required for successfully communication and interaction",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "97ceb5ccb9df2e323992": {
+    "src": "assets/vocab/cards/28cc4261e2142f41.webp",
+    "reviewed": true,
+    "alt": "Minh họa to be a workaholic/a shopaholic: a person who spends too much time working/too much time shopping",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "391f4297b8dc174e54a4": {
+    "src": "assets/vocab/cards/3aa81d4e411c4df7.webp",
+    "reviewed": true,
+    "alt": "Minh họa to serve a prison sentence: to carry out confinement in prison as a punishment",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "c6f43dee192d65e0b8dc": {
+    "src": "assets/vocab/cards/1cbaac2ae940bf90.webp",
+    "reviewed": true,
+    "alt": "Minh họa to take into consideration: to think about a particular fact or detail and allow it to have some influence when you are making a decision",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "16d0f8a9eea20e19092e": {
+    "src": "assets/vocab/cards/046f28ad9c3350fd.webp",
+    "reviewed": true,
+    "alt": "Minh họa to be soft on crime: not to impose strict punishments on offenders",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "f148713f2dc68a271be4": {
+    "src": "assets/vocab/cards/09dec161200ddafb.webp",
+    "reviewed": true,
+    "alt": "Minh họa to make a fresh start: to try something new after making mistakes in one’s life",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "a19b4a9055d20abbeabd": {
+    "src": "assets/vocab/cards/53db5db986482ee9.webp",
+    "reviewed": true,
+    "alt": "Minh họa drug traffic-king: importing and selling illegal drugs",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "2dd01ddf16519cc76f47": {
+    "src": "assets/vocab/cards/2f08c34a0f49bb4a.webp",
+    "reviewed": true,
+    "alt": "Minh họa to impose a ban on sth: to enforce an official rule which says that something is not allowed",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
+  },
+  "c641c92491617c13e7d9": {
+    "src": "assets/vocab/cards/53b8bea58f881b38.webp",
+    "reviewed": true,
+    "alt": "Minh họa capital punishment: punishment by death",
+    "review_note": "Codex inspected image against intended meaning; contextual memory aid."
   }
 }
