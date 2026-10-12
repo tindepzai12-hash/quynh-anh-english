@@ -10,6 +10,12 @@ TAIPEI=timezone(timedelta(hours=8), 'Asia/Taipei')
 SHOP=[
     dict(id='berry', name='Dâu ngọt', category='food', price=8, art='berry', detail='Một bữa ăn vui vẻ; dùng một lần.'),
     dict(id='fish', name='Bánh cá', category='food', price=12, art='fish', detail='Bữa ăn nhỏ cho Justin Mini; dùng một lần.'),
+    dict(id='apple', name='Táo giòn', category='food', price=9, art='apple', detail='Kéo đến miệng Justin để ăn; dùng một lần.'),
+    dict(id='cookie', name='Bánh quy', category='food', price=10, art='cookie', detail='Kéo đến miệng Justin để ăn; dùng một lần.'),
+    dict(id='icecream', name='Kem mát', category='food', price=12, art='icecream', detail='Kéo đến miệng Justin để ăn; dùng một lần.'),
+    dict(id='pizza', name='Pizza nhỏ', category='food', price=15, art='pizza', detail='Kéo đến miệng Justin để ăn; dùng một lần.'),
+    dict(id='cake', name='Bánh ngọt', category='food', price=14, art='cake', detail='Kéo đến miệng Justin để ăn; dùng một lần.'),
+    dict(id='greens', name='Rau xanh', category='food', price=6, art='greens', detail='Kéo đến miệng Justin để ăn; dùng một lần.'),
     dict(id='scarf', name='Khăn san hô', category='outfit', price=30, art='scarf', detail='Khăn đỏ mềm, có thể tháo và mặc lại.'),
     dict(id='cap', name='Mũ thuyền trưởng', category='hat', price=45, art='cap', detail='Mũ xanh với ngôi sao vàng.'),
     dict(id='lagoon', name='Ánh xanh đầm phá', category='skin', price=50, art='lagoon', detail='Tông xanh ngọc, giữ nguyên tạo hình Justin.'),

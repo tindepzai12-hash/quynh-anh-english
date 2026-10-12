@@ -1,12 +1,14 @@
+import {MOODS} from './EmotionEngine.js';
+import {FOODS} from './FoodRegistry.js';
 export function bindJustinUI(controller,root,settings,onSave){
  const status=root.querySelector('#justin-status'),start=root.querySelector('#justin-record'),stop=root.querySelector('#justin-stop'),replay=root.querySelector('#justin-replay'),speak=root.querySelector('#justin-speak'),recognize=root.querySelector('#justin-recognize');
- let catches=0;
+ let catches=0,ballTimer=null,drag=null,selectedFood='berry',disposed=false;
  const ball=root.querySelector('#justin-ball'),score=root.querySelector('#justin-game-score');
- function placeBall(){ball.style.left=(18+Math.random()*60)+'%';ball.style.top=(30+Math.random()*28)+'%';}
- controller.options.onStatus=(text,state)=>{root.querySelector('.justin-corner').dataset.state=state;
+ function placeBall(){ball.style.left='76%';ball.style.top='70%';}
+ controller.options.onStatus=(text,state)=>{root.querySelector('#justin-mood').textContent=state==='Sleeping'?'Đang ngủ':MOODS[controller.emotion.current];root.querySelector('.justin-corner').dataset.state=state;
  root.querySelector('#justin-wake').hidden=state!=='Sleeping';root.querySelector('#justin-sleep').hidden=state==='Sleeping';
- root.querySelector('#justin-end-play').hidden=state!=='Playing';root.querySelector('#justin-play').hidden=state==='Playing';
- ball.hidden=state!=='Playing';score.hidden=state!=='Playing';
+ root.querySelector('#justin-end-play').hidden=state!=='Playing';root.querySelector('#justin-play').hidden=false;
+ ball.hidden=state!=='Playing';score.hidden=state!=='Playing';root.querySelector('#justin-action').disabled=['Sleeping','Listening','Processing','Talking','SwitchingSkin'].includes(state);root.querySelectorAll('[data-pet-mode]').forEach(b=>b.disabled=['Listening','Processing','Talking'].includes(state));
  root.querySelectorAll('[data-react]').forEach(b=>b.disabled=['Sleeping','Playing','Listening','Processing','Talking'].includes(state));
 status.textContent=text;root.dataset.voiceState=state;start.disabled=!['Idle','Interacting'].includes(state);stop.disabled=!['Listening','Processing','Talking'].includes(state);replay.disabled=!controller.voice.lastBuffer||['Listening','Sleeping','Playing'].includes(state);speak.disabled=['Listening','Processing','Sleeping','Playing'].includes(state);recognize.disabled=!(window.SpeechRecognition||window.webkitSpeechRecognition)||['Listening','Processing','Talking','Sleeping','Playing'].includes(state);root.querySelector('#justin-demo').disabled=['Sleeping','Playing'].includes(state);root.querySelector('#justin-status-dot').classList.toggle('active',state==='Listening'||state==='Talking');};
  start.onclick=()=>controller.voice.startRaw(settings);stop.onclick=()=>{if(controller.state.current==='Listening'&&controller.voice.recorder?.state==='recording')controller.voice.stopRecording();else controller.voice.cancel();};replay.onclick=()=>controller.voice.replay(settings);
@@ -19,11 +21,22 @@ status.textContent=text;root.dataset.voiceState=state;start.disabled=!['Idle','I
  function updateMode(){root.querySelector('#justin-raw-panel').hidden=settings.mode!=='raw';root.querySelector('#justin-text-panel').hidden=settings.mode!=='text';}
  updateMode();root.querySelector('#justin-settings-save').onclick=async()=>{try{await onSave(settings);status.textContent='Đã lưu chế độ và thiết lập giọng nói.';}catch(e){status.textContent=e.message;}};
  controller.options.onLevel=level=>root.querySelector('#justin-level').style.setProperty('--voice-level',Math.min(1,level*5));
- root.querySelectorAll('[data-react]').forEach(b=>b.onclick=()=>controller.react(b.dataset.react,b.dataset.clip));root.querySelector('#justin-sleep').onclick=()=>controller.sleep();
- root.querySelector('#justin-wake').onclick=()=>controller.wake();
- root.querySelector('#justin-play').onclick=()=>{catches=0;score.textContent='Bắt bóng · 0/5';controller.play();placeBall();};
- root.querySelector('#justin-end-play').onclick=()=>controller.wake();
- ball.onclick=()=>{if(controller.state.current!=='Playing')return;catches++;score.textContent='Bắt bóng · '+catches+'/5';
- if(catches>=5){controller.wake();controller.react('head','Celebrate');status.textContent='Bắt đủ 5 quả rồi! Giỏi quá, mình chơi lại nhé.';}else {controller.animation?.play('Play');placeBall();}};
-
+ const tray=root.querySelector('#justin-food-tray'),action=root.querySelector('#justin-action'),help=root.querySelector('#justin-gesture-help');
+ controller.options.onMood=label=>root.querySelector('#justin-mood').textContent=controller.state.current==='Sleeping'?'Đang ngủ':label;
+ function renderFoods(){const inv=controller.options.getInventory?.()||{};tray.innerHTML=Object.entries(FOODS).filter(([id])=>inv[id]>0).map(([id,f])=>`<button class="food-choice" data-food="${id}" aria-pressed="${id===selectedFood}" aria-label="${f.name}, còn ${inv[id]}, kéo đến miệng hoặc chọn"><img src="assets/food/${id}.svg" alt=""><span>${f.name}<small>×${inv[id]}</small></span></button>`).join('')||'<p class="small-note">Chưa có đồ ăn. Đổi món trong cửa hàng bên dưới.</p>';}
+ controller.options.onInventory=renderFoods;renderFoods();
+ function choose(mode){clearTimeout(ballTimer);ball.disabled=false;controller.setMode(mode);root.querySelectorAll('[data-pet-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.petMode===mode)));tray.hidden=mode!=='feed';help.textContent={pet:'Vuốt nhẹ trên đầu. Bàn tay sẽ đi theo hướng bạn vuốt.',poke:'Chạm vùng bụng một lần; mỗi cú chạm có khoảng nghỉ.',ball:'Kéo quả bóng đến vùng muốn ngắm rồi thả. Có thể ném trượt.',feed:'Kéo món đang có đến miệng; thả ở nơi khác không mất món.',rotate:'Kéo ngang trên nhân vật để xoay.'}[mode];action.textContent={pet:'Xoa đầu một lần',poke:'Chạm bụng nhẹ',ball:'Ném về phía mặt',feed:'Đưa món đã chọn vào miệng',rotate:'Trở về góc chính diện'}[mode];if(mode==='ball'){catches=0;misses=0;score.textContent='Trúng 0 · Trượt 0';placeBall();}}
+ root.querySelectorAll('[data-pet-mode]').forEach(b=>b.onclick=()=>choose(b.dataset.petMode));
+ root.querySelector('#justin-sleep').onclick=()=>{controller.cancelFoodDrag();controller.sleep();};root.querySelector('#justin-wake').onclick=()=>{controller.wake();choose('pet');};root.querySelector('#justin-end-play').onclick=()=>choose('pet');
+ root.querySelector('#justin-sound').onclick=e=>{controller.sound.muted=!controller.sound.muted;e.currentTarget.setAttribute('aria-pressed',String(!controller.sound.muted));e.currentTarget.textContent='Âm thanh: '+(controller.sound.muted?'tắt':'bật');if(!controller.sound.muted)controller.sound.play('pet');};
+ let misses=0;
+ controller.options.onBallResult=(hit)=>{if(disposed)return;if(hit)catches++;else misses++;score.textContent=`Trúng ${catches} · Trượt ${misses}`;ball.disabled=false;};
+ action.onclick=async()=>{if(controller.interactionMode==='feed'){try{await controller.options.onConsume?.(selectedFood);}catch(e){status.textContent=e.message;}return;}if(controller.interactionMode==='ball'){controller.throwBall();return;}if(controller.interactionMode==='rotate'){controller.rotate(0);return;}controller.react(controller.interactionMode==='poke'?'body':'head');};
+ const onDown=e=>{const food=e.target.closest('[data-food]');if(!food)return;selectedFood=food.dataset.food;tray.querySelectorAll('[data-food]').forEach(b=>b.setAttribute('aria-pressed',String(b===food)));if(!controller.beginFoodDrag(selectedFood))return;drag={kind:'food',id:selectedFood,element:food,x:e.clientX,y:e.clientY,moved:false};food.setPointerCapture(e.pointerId);controller.moveFood(e.clientX,e.clientY);};
+ const onMove=e=>{if(!drag)return;drag.moved ||= Math.hypot(e.clientX-drag.x,e.clientY-drag.y)>8;if(drag.kind==='food'){const near=controller.moveFood(e.clientX,e.clientY);help.textContent=near?'Đúng miệng rồi — thả để cho Justin ăn.':'Đưa món đến miệng Justin; thả ngoài miệng không mất món.';}else {ball.style.transform=`translate(${e.clientX-drag.x}px,${e.clientY-drag.y}px)`;}};
+ const onUp=async e=>{if(!drag)return;const d=drag;drag=null;if(d.kind==='ball'){ball.style.transform='';if(d.moved)controller.throwAt(e.clientX,e.clientY);else controller.throwBall();return;}const contact=d.moved&&controller.surface?.mouthNear(e.clientX,e.clientY);controller.cancelFoodDrag();if(!contact){help.textContent='Chưa chạm miệng. Món ăn vẫn ở trong kho.';return;}try{action.disabled=true;await controller.options.onConsume?.(d.id);if(!disposed)help.textContent='Justin đã ăn. Bạn có thể chọn món khác trong khay.';}catch(err){status.textContent=err.message;}finally{if(!disposed)action.disabled=false;}};
+ const onCancel=()=>{drag=null;ball.style.transform='';controller.cancelFoodDrag();};
+ tray.addEventListener('pointerdown',onDown);root.addEventListener('pointermove',onMove);root.addEventListener('pointerup',onUp);root.addEventListener('pointercancel',onCancel);
+ ball.onpointerdown=e=>{if(controller.effects?.active)return;drag={kind:'ball',x:e.clientX,y:e.clientY,moved:false};ball.setPointerCapture(e.pointerId);};ball.onclick=e=>{if(e.detail===0)controller.throwBall();};
+ return ()=>{disposed=true;clearTimeout(ballTimer);onCancel();tray.removeEventListener('pointerdown',onDown);root.removeEventListener('pointermove',onMove);root.removeEventListener('pointerup',onUp);root.removeEventListener('pointercancel',onCancel);controller.options.onBallResult=null;controller.options.onInventory=null;controller.options.onMood=null;};
 }

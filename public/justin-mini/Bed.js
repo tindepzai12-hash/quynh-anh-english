@@ -25,7 +25,7 @@ export function settleOnBed(model,bed){
  model.updateMatrixWorld(true);
  const body=new THREE.Box3(),head=new THREE.Box3();model.traverse(o=>{
   if(!o.isSkinnedMesh||!o.visible)return;o.skeleton.update();
-  if(/^Retopology_(Body|Foot|Leg)|^Relaxed_/.test(o.name))body.expandByObject(o,true);
+  if(o.name==='Retopology_Body')body.expandByObject(o,true);
   if(o.name==='Retopology_Head')head.expandByObject(o,true);
  });
  if(body.isEmpty()||head.isEmpty())return false;
