@@ -26,6 +26,8 @@ def generate(instruction,messages,timeout=60):
             if len(raw)>2_000_000: raise ValueError('Phản hồi AI vượt giới hạn. Hãy thử lại với nội dung ngắn hơn.')
             result=json.loads(raw)
     except urllib.error.HTTPError as error:
+        if error.code==429:raise ValueError('AI đã hết hạn mức hiện tại. Thử lại sau hoặc kiểm tra quota trên Google AI Studio; bài làm vẫn được giữ.') from None
+        if error.code in (500,502,503,504):raise ValueError('Dịch vụ AI đang quá tải hoặc gián đoạn. Hãy thử lại sau; bài làm vẫn được giữ.') from None
         raise ValueError('Không gọi được AI (HTTP '+str(error.code)+'). Kiểm tra model, API key và hạn mức máy chủ.') from None
     except (urllib.error.URLError,TimeoutError): raise ValueError('Kết nối AI bị gián đoạn. Nội dung bạn đang viết vẫn được giữ.') from None
     except (json.JSONDecodeError,UnicodeError): raise ValueError('AI trả về dữ liệu không hợp lệ.') from None

@@ -1,0 +1,23 @@
+/* One stable frame for recall and answer; details scroll inside it. */
+.flashcard.stable-card{height:620px;min-height:620px;padding:22px 26px;display:grid;grid-template-rows:28px 190px 78px minmax(0,1fr) 48px;gap:10px;justify-items:center;overflow:hidden}
+.stable-card .flashcard-meta{margin:0;align-self:start}
+.stable-card .flash-visual{width:100%;height:190px;overflow:auto;scrollbar-width:thin}
+.stable-card .card-art{margin:0 auto;width:100%;max-width:400px}
+.stable-card .card-art .vocab-scene,.stable-card.revealed .card-art .vocab-scene{height:155px;margin:0;object-fit:contain}
+.stable-card .card-art figcaption{margin:4px auto;font-size:11px;line-height:1.3}
+.stable-card .phonetic-details{margin:4px auto;font-size:12px;text-align:left}
+.stable-card>h2{margin:0;align-self:center;font-size:clamp(24px,2.4vw,31px);line-height:1.2;max-width:100%;max-height:78px;overflow:auto;overflow-wrap:anywhere}
+.stable-card .flash-answer-slot{width:100%;height:100%;min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;padding:12px 16px;background:#edf6ff;border-radius:14px;text-align:left;color:#16385c}
+.stable-card .meaning-label{font-size:12px;font-weight:700;color:#486581}
+.stable-card .card-meaning h3{font-size:clamp(22px,2vw,27px);line-height:1.35;color:#073b79;margin:5px 0 8px;font-weight:850;overflow-wrap:anywhere}
+.stable-card .card-meaning>p{font-size:15px;line-height:1.5;margin:0;max-width:none;color:#304c68}
+.stable-card .card-example{padding:0;margin:10px 0 0;background:transparent;max-width:none}
+.stable-card .card-example summary{font-size:13px;font-weight:750;cursor:pointer;min-height:32px;padding:6px 0;color:#124d88}
+.stable-card .card-example p{font-size:15px;line-height:1.5;margin:6px 0}
+.stable-card .card-example small{font-size:11px;color:#496580}
+.stable-card .recall-prompt{display:flex;height:100%;justify-content:center;flex-direction:column;margin:0;font-size:19px;font-weight:750;text-align:center}
+.stable-card .recall-prompt span{font-size:14px;line-height:1.5;font-weight:500;margin-top:9px}
+.stable-card #flip-card{margin:0;width:100%;height:48px}
+.memory-ratings.awaiting-reveal{visibility:hidden;pointer-events:none}
+.flash-answer-slot:focus-visible{outline:3px solid #2180df;outline-offset:2px}
+@media(max-width:650px){.flashcard.stable-card{height:570px;min-height:570px;padding:17px 16px;grid-template-rows:26px 150px 74px minmax(0,1fr) 48px;gap:8px}.stable-card .flash-visual{height:150px}.stable-card .card-art .vocab-scene,.stable-card.revealed .card-art .vocab-scene{height:115px}.stable-card .flash-answer-slot{padding:11px 12px}.stable-card>h2{max-height:74px}.flash-navigation{margin-top:20px}}

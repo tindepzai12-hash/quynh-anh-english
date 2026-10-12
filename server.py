@@ -35,8 +35,12 @@ def public_catalog():
     d['readingAudit']=[{k:v for k,v in t.items() if k in ('id','title','status','count','issueCount')} for t in READING.list(admin=True)]
     d['shop']=ecosystem.SHOP
     d['quizzes']={k:[{a:b for a,b in q.items() if a not in ('answers','explanation')} for q in qs] for k,qs in d['quizzes'].items()}
+    image_path=BASE/'public/assets/vocab/card-images.json'
+    images=json.loads(image_path.read_text(encoding='utf-8')) if image_path.is_file() else {}
     for word in d['vocab']:
         word['id']=srs.word_id(word)
+        image=images.get(word['id'])
+        if image and image.get('reviewed') is True and re.fullmatch(r'assets/vocab/cards/[a-f0-9]{16}\.webp',image.get('src','')):word['illustration']=image
         word['phonetics']=PRONUNCIATION.get(word['term'])
         reviewed=VOCAB_REVIEWED.get(word['term'])
         if reviewed:
