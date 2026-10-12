@@ -6,7 +6,7 @@ TARGET=ROOT/'cloud-deploy'
 assert (TARGET/'.git').is_dir(),'Clone the intended private deployment repo first.'
 for name in ['node','public']:
     shutil.copytree(ROOT/name,TARGET/name,dirs_exist_ok=True,ignore=shutil.ignore_patterns('__pycache__'))
-for name in ['package.json','package-lock.json','server.py','ecosystem.py','exams.py','writing_exams.py','reading_engine.py','reading_import.py','ai_tutor.py','knowledge.py','srs.py','vocab-reviewed.json','vocab-pronunciation.json','.env.example']:
+for name in ['package.json','package-lock.json','server.py','ecosystem.py','exams.py','writing_exams.py','reading_engine.py','reading_import.py','ai_tutor.py','ai_provider.py','listening_practice.py','knowledge.py','srs.py','vocab-reviewed.json','vocab-pronunciation.json','.env.example']:
     shutil.copy2(ROOT/name,TARGET/name)
 deploy=TARGET/'deploy';deploy.mkdir(exist_ok=True)
 catalog=json.loads((ROOT/'catalog.private.json').read_text(encoding='utf-8'))

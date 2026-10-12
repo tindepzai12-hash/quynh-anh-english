@@ -2,7 +2,7 @@
 import argparse, json, mimetypes, os, re, sqlite3, time, unicodedata
 import uuid
 from contextlib import closing
-import ai_tutor
+import ai_tutor, ai_provider, listening_practice
 import ecosystem, knowledge, exams, writing_exams, reading_engine, reading_import, hmac, base64, hashlib
 import srs
 from datetime import date, timedelta
@@ -79,7 +79,7 @@ class Handler(BaseHTTPRequestHandler):
         route=unquote(urlparse(self.path).path)
         if route=='/api/reading-list': return self.reply({'published':READING.list(),'queue':[dict(id=t['id'],title=t['title'],status=t['status'],count=t['count'],issueCount=t['issueCount']) for t in READING.list(admin=True) if t['status']=='NEEDS_REVIEW']})
         if route=='/api/catalog': return self.reply(public_catalog())
-        if route=='/api/ai-status': return self.reply({'configured':ai_tutor.configured()})
+        if route=='/api/ai-status': return self.reply(ai_provider.status())
         if route=='/api/state':
             with closing(sqlite3.connect(DB,timeout=10)) as db, db:
                 db.execute('BEGIN IMMEDIATE')
@@ -183,19 +183,24 @@ class Handler(BaseHTTPRequestHandler):
                 if action=='review':return self.reply(READING.review(body['id'],body['version'],body.get('reviewer'),body.get('questionIds'),body.get('acknowledgeSource') is True))
                 if action=='publish':return self.reply(READING.publish(body['id'],body['version'],'authenticated-editor'))
                 raise ValueError('Thao tác studio không tồn tại.')
-            if route in ('/api/tutor','/api/knowledge','/api/lesson-overview','/api/writing-feedback'):
+            if route in ('/api/tutor','/api/knowledge','/api/lesson-overview','/api/writing-feedback','/api/listening-check','/api/listening-feedback'):
                 with closing(sqlite3.connect(DB)) as db:
                     current=json.loads(db.execute('SELECT body FROM state WHERE id=1').fetchone()[0])
                 if exams.active(current,time.time()): return self.reply({'error':'Hỏi đáp và học liệu hỗ trợ bị tắt khi đang thi.'},403)
                 if route=='/api/lesson-overview': return self.reply({'sources':knowledge.overview(KNOWLEDGE,str(body.get('id','')))})
                 if route=='/api/knowledge': result={'sources':knowledge.retrieve(KNOWLEDGE,body.get('query',''),body.get('lesson')), 'method':'Tra cứu tài liệu gốc, không phải câu trả lời AI'}
                 elif route=='/api/writing-feedback': result=ai_tutor.writing_feedback(body)
+                elif route=='/api/listening-check': return self.reply(listening_practice.check(body))
+                elif route=='/api/listening-feedback': result=listening_practice.feedback(body)
                 else: result=ai_tutor.answer(DATA,body,BASE,KNOWLEDGE)
                 with closing(sqlite3.connect(DB,timeout=10)) as db, db:
                     db.execute('BEGIN IMMEDIATE')
                     s=json.loads(db.execute('SELECT body FROM state WHERE id=1').fetchone()[0])
                     if exams.active(s,time.time()): return self.reply({'error':'Phiên thi đã bắt đầu; nhận xét và hỏi đáp được tạm ẩn.'},403)
-                    if route=='/api/writing-feedback':
+                    if route=='/api/listening-feedback':
+                        s.setdefault('listeningFeedback',[]).append(dict(date=time.time(),text=result['text'],accuracy=result['accuracy']))
+                        s['listeningFeedback']=s['listeningFeedback'][-30:]
+                    elif route=='/api/writing-feedback':
                         s.setdefault('writingFeedback',[]).append(dict(task=body['task'],date=time.time(),text=result['text']))
                     else:
                         s.setdefault('chatHistory',[]).append(dict(mode='search' if route=='/api/knowledge' else 'ai',query=body.get('query',body.get('question','')),lesson=body.get('lesson',body.get('id')),date=time.time(),result=result))
