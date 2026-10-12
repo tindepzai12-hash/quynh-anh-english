@@ -8,3 +8,5 @@
 @keyframes tutor-breathe{50%{opacity:.55}}@media(prefers-reduced-motion:reduce){.tutor-wait{animation:none}}
 @media(max-width:650px){.global-chat{left:8px;right:8px;bottom:8px;width:calc(100% - 16px);height:min(720px,calc(100dvh - 16px))}.global-chat-messages{max-height:none}.global-chat-head{padding:8px 12px}.tutor-tools{padding:8px 12px}.global-chat form{padding:8px 12px}.global-chat form>.text-link{margin-top:5px}.tutor-prompts button{font-size:11px}.global-chat textarea{font-size:16px}}
 .tutor-consent input{width:18px!important;height:18px;min-width:18px;display:inline-block}.tutor-consent{flex-direction:row!important;justify-content:flex-start!important;text-align:left}
+#justin-launcher{position:fixed;left:auto;top:auto;right:max(22px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));touch-action:manipulation}
+@media(max-width:650px){#justin-launcher{right:max(13px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom))}}
