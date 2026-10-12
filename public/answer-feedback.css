@@ -1,0 +1,20 @@
+/* Hallmark · component: graded answers · pre-emit critique: P4 H4 E4 S4 R4 V3
+ * Semantic colors apply only after grading; text/icons retain the meaning. */
+.midpoint-dialog label.answer-correct,.midpoint-dialog label.answer-correct:has(input:checked),.r-option.correct,.r-option.correct.selected,.result:not(.wrong),.review-question.correct,.r-answer-summary.answer-correct{
+ background:var(--color-success-soft);border-color:var(--color-success);color:var(--color-success)
+}
+.midpoint-dialog label.answer-incorrect,.midpoint-dialog label.answer-incorrect:has(input:checked),.r-option.incorrect,.r-option.incorrect.selected,.result.wrong,.review-question.wrong,.r-answer-summary.answer-incorrect{
+ background:var(--color-error-soft);border-color:var(--color-error);color:var(--color-error)
+}
+.review-question{padding:var(--space-sm);margin-bottom:var(--space-sm);border:1px solid var(--color-rule);border-radius:var(--radius-input)}
+.r-answer-summary{padding:var(--space-sm);border:1px solid var(--color-rule);border-radius:var(--radius-input)}
+.answer-status{margin-left:auto;white-space:nowrap;font-size:var(--text-xs)}
+.midpoint-dialog label.answer-correct input{accent-color:var(--color-success)}
+.midpoint-dialog label.answer-incorrect input{accent-color:var(--color-error)}
+.r-option.correct .r-option-status,.r-verdict.correct,.review-question.correct b>span,.word-correct,.midpoint-result.is-correct strong{color:var(--color-success)}
+.r-option.incorrect .r-option-status,.r-verdict.incorrect,.review-question.wrong b>span,.word-replace,.word-missing,.word-extra,.midpoint-result.is-review strong{color:var(--color-error)}
+.r-verdict.correct,.word-correct,.midpoint-result.is-correct{background:var(--color-success-soft)}
+.r-verdict.incorrect,.word-replace,.word-missing,.word-extra,.midpoint-result.is-review{background:var(--color-error-soft)}
+.result p,.review-question p,.midpoint-result p{color:var(--color-ink)}
+.r-answer-summary>p:first-child{color:inherit}.r-answer-summary .answer-key{color:var(--color-success)}
+@media(max-width:414px){.midpoint-dialog label{flex-wrap:wrap}.midpoint-dialog label>span{flex:1;min-width:0}.answer-status{margin-left:auto}}

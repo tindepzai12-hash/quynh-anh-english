@@ -4,7 +4,7 @@
  --color-accent:oklch(49% .19 255);--color-accent-soft:oklch(94% .032 245);--color-focus:oklch(52% .19 255);
  --color-rail:oklch(25% .06 255);--color-rail-hover:oklch(33% .067 255);--color-rail-muted:oklch(80% .025 245);
  --color-mint:oklch(93% .035 175);--color-peach:oklch(95% .025 65);--color-sand:oklch(96% .024 95);
- --color-success:oklch(38% .095 170);--color-error:oklch(43% .15 30);--color-shadow:oklch(25% .06 255 / .06);
+ --color-success:oklch(38% .12 145);--color-error:oklch(43% .17 25);--color-success-soft:oklch(96% .035 145);--color-error-soft:oklch(96% .025 25);--color-shadow:oklch(25% .06 255 / .06);
  --font-display:Nunito,'Segoe UI',sans-serif;--font-body:Nunito,'Segoe UI',sans-serif;--font-outlier:ui-monospace,monospace;
  --space-3xs:4px;--space-2xs:8px;--space-xs:12px;--space-sm:16px;--space-md:24px;--space-lg:32px;--space-xl:48px;--space-2xl:64px;
  --text-xs:12px;--text-sm:14px;--text-md:16px;--text-lg:20px;--text-xl:28px;--text-display:clamp(32px,3.5vw,48px);
