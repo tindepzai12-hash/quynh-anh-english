@@ -17,5 +17,9 @@
   "Revenue": {
     "translation_vi": "doanh thu; nguồn thu (của chính phủ)",
     "review_note": "Corrected profit/revenue confusion against the existing English definition: money received before deducting costs."
+  },
+  "A lunar module": {
+    "translation_vi": "mô-đun đổ bộ Mặt Trăng",
+    "review_note": "Clarified the existing English definition: the small craft travelling between the lunar surface and the orbiting spacecraft."
   }
 }
