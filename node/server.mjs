@@ -110,6 +110,11 @@ app.get('/media/:id',async(req,res)=>{
   if(active)return res.status(403).json({error:'Học liệu hỗ trợ được ẩn khi đang thi.'});
   res.sendFile(resource.path);
 });
+app.get('/quynh-anh-media/:file',async(req,res)=>{
+  const names=['anh-yeu-em-2k.mp4','poster.jpg'];if(!names.includes(req.params.file))return res.status(404).end();
+  if(cloud&&!await identify(req))return res.status(401).json({error:'Đăng nhập để xem video Quỳnh Anh.'});
+  res.set('Cache-Control','private, max-age=3600');res.sendFile(root+'deploy/quynh-anh/'+req.params.file);
+});
 app.use(express.static(root+'public',{dotfiles:'deny',setHeaders:(res,path)=>{if(/\.(glb|png|webp|woff2)$/.test(path))res.set('Cache-Control','public, max-age=86400')}}));
 app.use((error,req,res,next)=>{res.status(error.status||500).json({error:error.status?error.message:'Kết nối chưa hoàn tất. Tiến trình đã lưu vẫn được giữ; hãy thử lại.'})});
 const listener=app.listen(port,cloud?'0.0.0.0':'127.0.0.1',()=>console.log(`Quynh Anh English Node.js: ${origin}`));
