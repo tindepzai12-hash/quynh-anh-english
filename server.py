@@ -361,6 +361,12 @@ class Handler(BaseHTTPRequestHandler):
                             part=min(remaining,minutes-used)
                             days.append(dict(date=current.isoformat(),id=lid,minutes=part,continued=remaining!=cost)); used+=part; remaining-=part
                     s['plan']=dict(minutes=minutes,start=start.isoformat(),weekdays=sorted(set(weekdays)),days=days,lessons=ids); response=s['plan']
+                elif route=='/api/lesson-workbook':
+                    lid=body.get('id'); text=body.get('text')
+                    if not any(l['id']==lid for l in DATA['lessons']) or not isinstance(text,str) or len(text)>30000: raise ValueError('Bài học hoặc nội dung bài làm không hợp lệ.')
+                    if exams.active(s,time.time()): raise ValueError('Kết thúc bài thi trước khi mở bài tập bài giảng.')
+                    response=dict(text=text,updated=time.time())
+                    s.setdefault('lessonWorkbooks',{})[lid]=response
                 elif route=='/api/midpoint-answer':
                     lid=body.get('id'); q=MIDPOINTS.get(lid)
                     if not q or type(body.get('choice')) is not int or not 0<=body['choice']<len(q['options']): raise ValueError('Chọn một đáp án trong câu hỏi của bài.')

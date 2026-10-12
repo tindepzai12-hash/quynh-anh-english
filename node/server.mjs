@@ -22,6 +22,7 @@ if(!secret&&!cloud){const path=root+'state/node-session.private.txt';if(!existsS
 if(!secret||secret.length<32)throw Error('SESSION_SECRET needs at least 32 characters.');
 const admin=configured?createClient(process.env.SUPABASE_URL,process.env.SUPABASE_SERVICE_ROLE_KEY,{auth:{persistSession:false,autoRefreshToken:false}}):null;
 const mediaManifest=existsSync(root+'deploy/course-media.json')?JSON.parse(readFileSync(root+'deploy/course-media.json','utf8')):{resources:{}};
+const documentManifest=existsSync(root+'deploy/course-documents.json')?JSON.parse(readFileSync(root+'deploy/course-documents.json','utf8')):{resources:{}};
 const local=cloud?null:new LocalState(process.env.OCEAN_LOCAL_DB||root+'state/learning.sqlite3');
 const persistent=admin?new CloudState(admin):null;
 if(!cloud&&!process.env.OCEAN_READING_DB)process.env.OCEAN_READING_DB=root+'state/learning-reading-content.sqlite3';
@@ -91,14 +92,14 @@ app.use('/api',async(req,res)=>{
   const id=user?.id||'local-guest';
   await ownerQueue(id,async()=>{
     const row=user?await persistent.read(user.id):local?await local.read():{body:freshState()};
-    const field=req.method==='POST'&&['/notes','/plan','/settings'].includes(req.path)?req.path+(req.path==='/notes'?':'+req.body.id:''):null;
+    const field=req.method==='POST'&&['/notes','/plan','/settings','/lesson-workbook'].includes(req.path)?req.path+(['/notes','/lesson-workbook'].includes(req.path)?':'+req.body.id:''):null;
     const previousVersion=field?row.body._fieldVersions?.[field]||0:0;
     if(field&&(user||req.body._fieldVersion!==undefined)&&req.body._fieldVersion!==previousVersion)return res.status(409).json({error:'Nội dung vừa đổi ở thiết bị khác. Bản bạn đang viết chưa được ghi đè; tải lại và so sánh trước khi lưu.',code:'FIELD_CONFLICT',version:previousVersion});
     const result=await engine.call(req.originalUrl,req.method,row.body,req.body,!cloud?req.get('authorization'):undefined);
     if(field&&result.status<400&&result.state){(result.state._fieldVersions||={})[field]=previousVersion+1;if(result.data&&typeof result.data==='object')result.data._syncVersion=previousVersion+1}
     if(result.state&&result.status<500){if(user)await persistent.write(user.id,result.state,row.version);else if(local)await local.write(result.state)}
     if(cloud&&!user&&req.path==='/catalog'){result.data.readingContent=[];result.data.quizzes={}}
-    if(req.path==='/catalog'&&result.data){for(const lesson of result.data.lessons||[])if(mediaManifest.resources[lesson.video]||(!cloud&&lesson.video&&existsSync(root+'../artifacts/course-media/videos/'+lesson.video+'.mp4')))lesson.cloudMediaAvailable=true;for(const id of Object.keys(mediaManifest.resources))if(result.data.resources[id])result.data.resources[id].cloudAvailable=true;}
+    if(req.path==='/catalog'&&result.data){for(const lesson of result.data.lessons||[])if(mediaManifest.resources[lesson.video]||(!cloud&&lesson.video&&existsSync(root+'../artifacts/course-media/videos/'+lesson.video+'.mp4')))lesson.cloudMediaAvailable=true;for(const id of Object.keys({...mediaManifest.resources,...documentManifest.resources}))if(result.data.resources[id]){result.data.resources[id].cloudAvailable=true;result.data.resources[id].exists=true;}}
     if(req.path==='/state'&&result.data){result.data._syncVersions=result.state?._fieldVersions||{};delete result.data._fieldVersions;delete result.data.guestBackups;delete result.data.guestImports}
     res.status(result.status).json(result.data);
   });
@@ -109,15 +110,17 @@ app.get('/media/:id',async(req,res)=>{
   const user=await identify(req);if(cloud&&!user)return res.status(401).json({error:'Đăng nhập để xem bài giảng.'});
   const current=user?await persistent.read(user.id):await local.read();const active=[...Object.values(current.body.exams||{}),...Object.values(current.body.writingExams||{}),...Object.values(current.body.readingSessions||{})].some(e=>e.mode==='exam'&&!e.submitted&&e.deadline>Date.now()/1000);
   if(active)return res.status(403).json({error:'Học liệu hỗ trợ được ẩn khi đang thi.'});
-  const media=mediaManifest.resources[req.params.id];
+  const manifest=mediaManifest.resources[req.params.id]?mediaManifest:documentManifest;const media=manifest.resources[req.params.id];
   if(cloud){
     if(!media||!admin)return res.status(404).json({error:'Tài liệu này chưa có trong kho online.'});
-    const {data:signed,error}=await admin.storage.from(mediaManifest.bucket).createSignedUrl(media.object,14400);
+    const {data:signed,error}=await admin.storage.from(manifest.bucket).createSignedUrl(media.object,14400);
     if(error||!signed?.signedUrl)return res.status(503).json({error:'Kho video chưa trả lời. Hãy thử tải lại.'});
     res.set('Cache-Control','private, no-store');return res.redirect(307,signed.signedUrl);
   }
   const prepared=fileURLToPath(new URL('../../artifacts/course-media/videos/'+req.params.id+'.mp4',import.meta.url));
   if(existsSync(prepared))return res.sendFile(prepared);
+  const documentFile=Object.values(documentManifest.resources).length&&documentManifest.resources[req.params.id];
+  if(documentFile){const path=fileURLToPath(new URL('../../artifacts/course-documents/'+documentFile.object.split('/').at(-1),import.meta.url));if(existsSync(path))return res.sendFile(path);}
   if(!resource.path||!existsSync(resource.path))return res.status(404).json({error:'Chưa tìm thấy video trên laptop.'});
   res.sendFile(resource.path);
 });
