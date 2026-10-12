@@ -30,7 +30,8 @@ tutorForm.onsubmit=async e=>{
  try{const r=await api(mode==='ai'?'/api/tutor':'/api/knowledge',payload);if(token!==tutorGeneration)return;
    const nearBottom=tutorMessages.scrollHeight-tutorMessages.scrollTop-tutorMessages.clientHeight<140;
    reply.innerHTML=mode==='ai'?'<div class="ai-answer">'+tutorText(r.text)+'</div>':'';
-   if(mode==='ai'){tutorTurns.push({role:'user',content:question},{role:'assistant',content:r.text.slice(0,12000)});tutorTurns=tutorTurns.slice(-6);}
+   if(mode==='ai'&&!r.requiresPersonal){tutorTurns.push({role:'user',content:question},{role:'assistant',content:r.text.slice(0,12000)});tutorTurns=tutorTurns.slice(-6);}
+   if(r.requiresPersonal){const enable=document.createElement('button');enable.type='button';enable.className='button small';enable.textContent='Phân tích bằng số liệu của mình';enable.onclick=()=>{if(chatBusy)return;$('#tutor-personal').checked=true;tutorQuery.value=question;tutorForm.requestSubmit($('#global-ai-send'));};reply.append(enable);}
    if(mode==='search'&&!r.sources?.length)reply.textContent='Chưa tìm thấy nguồn. Thử từ khóa tiếng Anh ngắn hơn nhé.';
    if(r.sources?.length){const sources=document.createElement('details');sources.className='tutor-sources';sources.innerHTML='<summary>Nguồn tham khảo · '+r.sources.length+'</summary>'+r.sources.map(s=>s.text?sourceMarkup(s):'<a target="_blank" rel="noopener" href="'+(s.href?.startsWith('/tutor-guide.html#')?esc(s.href):'/media/'+esc(s.id)+'#page='+(s.page||1))+'">'+esc(s.title)+' · trang '+(s.page||'?')+'</a>').join('');reply.append(sources);}
    if(nearBottom)tutorScroll(true);emotion('encouraging',3);
