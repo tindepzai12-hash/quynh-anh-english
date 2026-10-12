@@ -229,26 +229,44 @@ def check_answers(doc,answers):
         if q['type'] in CHOICES:
             ids={o['id'] for o in q['options']}
             if q['type']=='multiple':
-                if not isinstance(a,list) or len(a)!=len(set(a)) or not set(a)<=ids or len(a)>q['constraints']['select']:raise ValueError('Lựa chọn nhiều đáp án không hợp lệ.')
+                if not isinstance(a,list) or any(not isinstance(x,str) for x in a) or len(a)!=len(set(a)) or not set(a)<=ids or len(a)>q['constraints']['select']:raise ValueError('Lựa chọn nhiều đáp án không hợp lệ.')
             elif not isinstance(a,str) or (a and a not in ids):raise ValueError('ID phương án không hợp lệ.')
         elif not isinstance(a,str) or len(a)>500:raise ValueError('Đáp án văn bản không hợp lệ.')
 def draft(s,store,body,now):
     e=get(s,body.get('session'))
     if e['submitted']:raise ValueError('Bài đã khóa sau khi nộp.')
+    if e.get('paused'):raise ValueError('Tiếp tục buổi luyện trước khi chỉnh bài làm.')
     if e['mode']=='exam' and now>=e['deadline']:raise ValueError('Hết giờ; bài đã lưu sẽ được chấm.')
     if body.get('version')!=e['version']:raise ValueError('Bài thay đổi ở tab khác. Bản nháp của bạn được giữ; tải lại để đối chiếu.')
     if body.get('contentVersion')!=e['contentVersion']:raise ValueError('Phiên bản nội dung không khớp.')
     doc=store.get(e['test'],e['contentVersion']);answers=body.get('answers');check_answers(doc,answers)
     qids={q['id'] for q in doc['questions']};flags=body.get('flags',[]);focus=body.get('focus')
-    if not isinstance(flags,list) or not set(flags)<=qids or focus not in qids:raise ValueError('Điều hướng không hợp lệ.')
+    if not isinstance(flags,list) or any(not isinstance(x,str) for x in flags) or not set(flags)<=qids or not isinstance(focus,str) or focus not in qids:raise ValueError('Điều hướng không hợp lệ.')
     highlights=body.get('highlights',[])
     if not isinstance(highlights,list) or len(highlights)>200:raise ValueError('Quá nhiều đoạn tô sáng.')
     blocks={b.get('id'):b for p in doc['passages'] for b in p['blocks']}
     for h in highlights:
+        if not isinstance(h,dict) or not isinstance(h.get('block'),str):raise ValueError('Đoạn tô sáng không hợp lệ.')
         b=blocks.get(h.get('block'));a=h.get('start');z=h.get('end')
         if not b or type(a)is not int or type(z)is not int or not 0<=a<z<=len(b.get('text','')):raise ValueError('Đoạn tô sáng không khớp văn bản nguồn.')
-    e.update(answers=copy.deepcopy(answers),flags=sorted(set(flags)),focus=focus,highlights=highlights,updated=now,version=e['version']+1)
+    notes=body.get('notes',e.get('notes',{}));prefs=body.get('preferences',e.get('preferences',{}))
+    if not isinstance(notes,dict) or not set(notes)<={p['id'] for p in doc['passages']} or any(not isinstance(v,str) or len(v)>4000 for v in notes.values()):raise ValueError('Ghi chú phải thuộc bài đọc và không vượt 4.000 ký tự mỗi bài.')
+    if not isinstance(prefs,dict) or set(prefs)-{'fontSize','split'} or type(prefs.get('fontSize',16))is not int or prefs.get('fontSize',16) not in (16,18,20,22) or type(prefs.get('split',50))is not int or not 35<=prefs.get('split',50)<=65:raise ValueError('Thiết lập khung đọc không hợp lệ.')
+    e.update(answers=copy.deepcopy(answers),flags=sorted(set(flags)),focus=focus,highlights=copy.deepcopy(highlights),notes=copy.deepcopy(notes),preferences=copy.deepcopy(prefs),updated=now,version=e['version']+1)
     e['events'].append(dict(action='SAVE',at=now,version=e['version']));e['events']=e['events'][-200:];return e
+
+def pause(s,body,now):
+    e=get(s,body.get('session'))
+    if e['submitted'] or e['mode']!='guided':raise ValueError('Chỉ buổi luyện tập chưa nộp mới được tạm dừng.')
+    if body.get('version')!=e['version']:raise ValueError('Phiên đã thay đổi. Tải lại để đối chiếu trước khi tiếp tục.')
+    target=body.get('paused')
+    if type(target)is not bool:raise ValueError('Trạng thái tạm dừng không hợp lệ.')
+    if bool(e.get('paused'))==target:return e
+    if target:e['pausedAt']=now
+    else:e['pausedSeconds']=e.get('pausedSeconds',0)+max(0,now-e.get('pausedAt',now));e.pop('pausedAt',None)
+    e.update(paused=target,updated=now,version=e['version']+1)
+    e['events'].append(dict(action='PAUSE' if target else 'RESUME',at=now));e['events']=e['events'][-200:]
+    return e
 def words(answer):
     tokens=norm(answer).split();numbers=[x for x in tokens if re.fullmatch(r'[\d.,:/-]+',x)]
     return len(tokens)-len(numbers),len(numbers)
@@ -263,6 +281,7 @@ def score(q,answer):
 def submit(s,store,body,now):
     e=get(s,body.get('session'))
     if e['submitted']:return e['result']
+    if e.get('paused'):raise ValueError('Tiếp tục buổi luyện trước khi nộp bài.')
     expired=e['mode']=='exam' and now>=e['deadline']
     if not expired and body.get('version')!=e['version']:raise ValueError('Hãy lưu lựa chọn mới nhất trước khi nộp.')
     doc=store.get(e['test'],e['contentVersion']);issues=validate(doc)
@@ -270,7 +289,7 @@ def submit(s,store,body,now):
     rows=[]
     for q in doc['questions']:
         a=e['answers'].get(q['id'],[] if q['type']=='multiple' else '')
-        rows.append(dict(questionId=q['id'],number=q['number'],answer=a,correct=score(q,a),key=q['key'],explanation=q.get('explanation'),unanswered=not a if isinstance(a,list) else not norm(a)))
+        rows.append(dict(questionId=q['id'],number=q['number'],type=q['type'],answer=a,correct=score(q,a),key=q['key'],explanation=q.get('explanation'),unanswered=not a if isinstance(a,list) else not norm(a)))
     score_=sum(r['correct'] is True for r in rows);total=len(rows)
     result=dict(id=e['test'],session=e['id'],contentVersion=e['contentVersion'],date=now,mode=e['mode'],score=score_,total=total,accuracy=round(score_/total*100,1),rows=rows,answers=[str(r['answer']) for r in rows],correct=[r['correct'] for r in rows],key=[],explanations=[],expired=expired,engine='reading-v5')
     s.setdefault('attempts',[]).append(result);e.update(submitted=True,result=result)

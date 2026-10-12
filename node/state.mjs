@@ -19,7 +19,7 @@ export class CloudState {
 const digest=x=>createHash('sha256').update(JSON.stringify(x)).digest('hex');
 export function mergeGuest(target,guest){
   const token=digest(guest);if(target.guestImports?.includes(token))return target;
-  const occupied=['progress','notes','readingSessions','writingDrafts','vocabReviews','exams','writingExams','timestampNotes'].some(k=>Object.keys(target[k]||{}).length)||['attempts','known','vocabFavorites','writingSubmissions','speakingSessions'].some(k=>target[k]?.length)||target.plan||target.ecosystem?.ledger?.length;
+  const occupied=['progress','notes','readingSessions','writingDrafts','vocabReviews','exams','writingExams','timestampNotes','listeningDraft'].some(k=>Object.keys(target[k]||{}).length)||['attempts','known','vocabFavorites','writingSubmissions','speakingSessions','listeningAttempts'].some(k=>target[k]?.length)||target.plan||target.ecosystem?.ledger?.length;
   if(!occupied)return {...structuredClone(guest),guestImports:[...(target.guestImports||[]),token]};
   const out=structuredClone(target);
   out.guestBackups=[...(out.guestBackups||[]),{token,body:guest}].slice(-3);

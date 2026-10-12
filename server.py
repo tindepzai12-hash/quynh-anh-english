@@ -232,9 +232,14 @@ class Handler(BaseHTTPRequestHandler):
                     if e['submitted'] and exams.active(s,time.time()):raise ValueError('Xem đáp án bị tắt khi đang thi.')
                     response=dict(session=e,document=reading_engine.public(READING.get(e['test'],e['contentVersion'])),serverNow=time.time())
                 elif route=='/api/reading-draft':response=reading_engine.draft(s,READING,body,time.time())
+                elif route=='/api/reading-pause':response=reading_engine.pause(s,body,time.time())
                 elif route=='/api/reading-submit':
                     if exams.active(s,time.time()) and not any(e['id']==body.get('session') for e in exams.active(s,time.time())):raise ValueError('Không xem đáp án bài khác khi đang thi.')
                     response=reading_engine.submit(s,READING,body,time.time())
+                elif route=='/api/listening-draft':response=listening_practice.draft(s,body,time.time())
+                elif route=='/api/listening-attempt':
+                    if exams.active(s,time.time()):raise ValueError('Đối chiếu transcript bị khóa trong phiên thi.')
+                    response=listening_practice.attempt(s,body,time.time())
                 elif route=='/api/progress':
                     lesson=next((l for l in DATA['lessons'] if l['id']==body.get('id')),None)
                     if not lesson: raise ValueError('Bài học không tồn tại')

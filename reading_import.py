@@ -5,6 +5,20 @@ from pathlib import Path
 import xml.etree.ElementTree as ET
 import reading_engine as engine
 
+def docx_text(node,ns):
+    """Keep explicit line breaks/tabs and paragraph boundaries in table cells."""
+    chunks=[]
+    def walk(e):
+        tag=e.tag.rsplit('}',1)[-1]
+        if tag=='t':chunks.append(e.text or '')
+        elif tag in ('br','cr'):chunks.append('\n')
+        elif tag=='tab':chunks.append('\t')
+        else:
+            for child in e:walk(child)
+            if tag=='p':chunks.append('\n')
+    walk(node)
+    return ''.join(chunks).rstrip('\n')
+
 class BlocksHTML(HTMLParser):
     def __init__(self):super().__init__();self.blocks=[];self.buf=[];self.row=[];self.rows=[];self.cell=[];self.in_table=False;self.skip=0
     def handle_starttag(self,tag,attrs):
@@ -47,10 +61,10 @@ def extract(raw,name,mime=None):
             root=ET.fromstring(z.read('word/document.xml'));body=root.find('w:body',ns)
             for node in body:
                 if node.tag.endswith('}tbl'):
-                    rows=[[''.join(c.itertext()) if False else ''.join(t.text or '' for t in c.findall('.//w:t',ns)) for c in r.findall('w:tc',ns)] for r in node.findall('w:tr',ns)]
+                    rows=[[docx_text(c,ns) for c in r.findall('w:tc',ns)] for r in node.findall('w:tr',ns)]
                     blocks.append(dict(type='table',rows=rows))
                 elif node.tag.endswith('}p'):
-                    text=''.join(t.text or '' for t in node.findall('.//w:t',ns))
+                    text=docx_text(node,ns)
                     style=node.find('w:pPr/w:pStyle',ns);kind='heading' if style is not None and 'heading' in str(style.attrib).lower() else 'paragraph'
                     if text:blocks.append(dict(type=kind,text=text))
             for info in z.infolist():
@@ -85,7 +99,16 @@ def candidate(raw,name,source):
         questions.append(dict(id=f'q{m[1]}',number=int(m[1]),type=typ,prompt=m[2].strip(),passageId=pid,groupId=gid,options=options,constraints=dict(maxWords=limit,maxNumbers=0),source=source,key=dict(optionIds=[o['id'] for o in options if o['label']==value],accepted=[value] if value and not options else [],provenance=source['reference'] if key else '',status='UNVERIFIED')))
     passage_blocks=copy.deepcopy(parsed['blocks'])
     if matches:
-        before=text[:matches[0].start()].strip();passage_blocks=[dict(id='passage-b1',type='paragraph',text=before)] if before else []
+        # Preserve paragraphs, tables, headings and images in source order.
+        # Stop at the first explicitly delimited question, including within a block.
+        passage_blocks=[]
+        for b in parsed['blocks']:
+            fragment=b.get('text','');m=re.search(r'^\s*(?:Question|Q)\s*\d+\s*[.:]',fragment,re.M|re.I)
+            if m:
+                prefix=fragment[:m.start()].strip()
+                if prefix:passage_blocks.append(dict(copy.deepcopy(b),text=prefix))
+                break
+            passage_blocks.append(copy.deepcopy(b))
     return dict(id='import-'+checksum[:16],title=Path(name).stem,testType='practice',fullTest=False,duration=600,passages=[dict(id=pid,title=Path(name).stem,blocks=passage_blocks)],groups=[dict(id=gid,passageIds=[pid],instructions='Đối chiếu hướng dẫn nguồn trước khi xuất bản.')],questions=questions,sourceDocument=dict(source=source,blocks=parsed['blocks'],warnings=parsed['issues']))
 
 def drive_download(file_id):

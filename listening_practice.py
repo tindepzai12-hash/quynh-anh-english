@@ -2,6 +2,26 @@
 import re,unicodedata,json
 import ai_provider, tutor_knowledge
 
+def draft(state,body,now):
+    old=state.get('listeningDraft',{})
+    if body.get('version')!=old.get('version',0):raise ValueError('Bản nghe đã đổi ở tab khác. Bản của bạn giữ trên thiết bị; tải lại để đối chiếu.')
+    if body.get('sourceKind') not in ('sample','file'):raise ValueError('Nguồn nghe không hợp lệ.')
+    for field,limit in (('reference',5000),('answer',5000),('sourceName',200)):
+        if not isinstance(body.get(field),str) or len(body[field])>limit:raise ValueError('Nội dung bản nháp nghe vượt giới hạn.')
+    sample=body.get('sample',0)
+    if type(sample)is not int or not 0<=sample<=2:raise ValueError('Câu mẫu không hợp lệ.')
+    result={key:body[key] for key in ('reference','answer','sourceKind','sourceName')}
+    result.update(sample=sample,version=old.get('version',0)+1,updated=now)
+    state['listeningDraft']=result;return result
+
+def attempt(state,body,now):
+    # Recompute comparison on the server; client percentages are never trusted.
+    result=check(body)
+    import uuid
+    rec=dict(id=uuid.uuid4().hex,date=now,reference=body['reference'],answer=body['answer'],result=result)
+    history=state.setdefault('listeningAttempts',[]);history.append(rec);state['listeningAttempts']=history[-50:]
+    return rec
+
 def tokens(text):
     text=unicodedata.normalize('NFKC',text).lower().replace('’',"'")
     return re.findall(r"[\w]+(?:'[\w]+)*",text)

@@ -1,0 +1,194 @@
+[
+  {
+    "screen": "home",
+    "width": 390,
+    "height": 844,
+    "actualWidth": 390,
+    "overflow": false,
+    "title": "Hôm nay, mìnhtiến thêm một chút."
+  },
+  {
+    "screen": "reading-review/fc71bb6617ef4642847fd0c0b0de884e",
+    "width": 390,
+    "height": 844,
+    "actualWidth": 390,
+    "overflow": false,
+    "title": "Academic Reading · Practice 01"
+  },
+  {
+    "screen": "listening",
+    "width": 390,
+    "height": 844,
+    "actualWidth": 390,
+    "overflow": false,
+    "title": "Nghe từng chút, hiểu rõ hơn."
+  },
+  {
+    "screen": "speaking",
+    "width": 390,
+    "height": 844,
+    "actualWidth": 390,
+    "overflow": false,
+    "title": "Một câu chuyện. Giọng nói của bạn."
+  },
+  {
+    "screen": "writing",
+    "width": 390,
+    "height": 844,
+    "actualWidth": 390,
+    "overflow": false,
+    "title": "Một ý rõ. Một bài viết tốt hơn."
+  },
+  {
+    "screen": "library",
+    "width": 390,
+    "height": 844,
+    "actualWidth": 390,
+    "overflow": false,
+    "title": "Gặp từ mới. Nhớ thật lâu."
+  },
+  {
+    "screen": "home",
+    "width": 768,
+    "height": 1024,
+    "actualWidth": 768,
+    "overflow": false,
+    "title": "Hôm nay, mìnhtiến thêm một chút."
+  },
+  {
+    "screen": "reading-review/fc71bb6617ef4642847fd0c0b0de884e",
+    "width": 768,
+    "height": 1024,
+    "actualWidth": 768,
+    "overflow": false,
+    "title": "Academic Reading · Practice 01"
+  },
+  {
+    "screen": "listening",
+    "width": 768,
+    "height": 1024,
+    "actualWidth": 768,
+    "overflow": false,
+    "title": "Nghe từng chút, hiểu rõ hơn."
+  },
+  {
+    "screen": "speaking",
+    "width": 768,
+    "height": 1024,
+    "actualWidth": 768,
+    "overflow": false,
+    "title": "Một câu chuyện. Giọng nói của bạn."
+  },
+  {
+    "screen": "writing",
+    "width": 768,
+    "height": 1024,
+    "actualWidth": 768,
+    "overflow": false,
+    "title": "Một ý rõ. Một bài viết tốt hơn."
+  },
+  {
+    "screen": "library",
+    "width": 768,
+    "height": 1024,
+    "actualWidth": 768,
+    "overflow": false,
+    "title": "Gặp từ mới. Nhớ thật lâu."
+  },
+  {
+    "screen": "home",
+    "width": 1440,
+    "height": 900,
+    "actualWidth": 1440,
+    "overflow": false,
+    "title": "Hôm nay, mìnhtiến thêm một chút."
+  },
+  {
+    "screen": "reading-review/fc71bb6617ef4642847fd0c0b0de884e",
+    "width": 1440,
+    "height": 900,
+    "actualWidth": 1440,
+    "overflow": false,
+    "title": "Academic Reading · Practice 01"
+  },
+  {
+    "screen": "listening",
+    "width": 1440,
+    "height": 900,
+    "actualWidth": 1440,
+    "overflow": false,
+    "title": "Nghe từng chút, hiểu rõ hơn."
+  },
+  {
+    "screen": "speaking",
+    "width": 1440,
+    "height": 900,
+    "actualWidth": 1440,
+    "overflow": false,
+    "title": "Một câu chuyện. Giọng nói của bạn."
+  },
+  {
+    "screen": "writing",
+    "width": 1440,
+    "height": 900,
+    "actualWidth": 1440,
+    "overflow": false,
+    "title": "Một ý rõ. Một bài viết tốt hơn."
+  },
+  {
+    "screen": "library",
+    "width": 1440,
+    "height": 900,
+    "actualWidth": 1440,
+    "overflow": false,
+    "title": "Gặp từ mới. Nhớ thật lâu."
+  },
+  {
+    "screen": "home",
+    "width": 1920,
+    "height": 1080,
+    "actualWidth": 1920,
+    "overflow": false,
+    "title": "Hôm nay, mìnhtiến thêm một chút."
+  },
+  {
+    "screen": "reading-review/fc71bb6617ef4642847fd0c0b0de884e",
+    "width": 1920,
+    "height": 1080,
+    "actualWidth": 1920,
+    "overflow": false,
+    "title": "Academic Reading · Practice 01"
+  },
+  {
+    "screen": "listening",
+    "width": 1920,
+    "height": 1080,
+    "actualWidth": 1920,
+    "overflow": false,
+    "title": "Nghe từng chút, hiểu rõ hơn."
+  },
+  {
+    "screen": "speaking",
+    "width": 1920,
+    "height": 1080,
+    "actualWidth": 1920,
+    "overflow": false,
+    "title": "Một câu chuyện. Giọng nói của bạn."
+  },
+  {
+    "screen": "writing",
+    "width": 1920,
+    "height": 1080,
+    "actualWidth": 1920,
+    "overflow": false,
+    "title": "Một ý rõ. Một bài viết tốt hơn."
+  },
+  {
+    "screen": "library",
+    "width": 1920,
+    "height": 1080,
+    "actualWidth": 1920,
+    "overflow": false,
+    "title": "Gặp từ mới. Nhớ thật lâu."
+  }
+]
