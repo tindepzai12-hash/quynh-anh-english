@@ -21,3 +21,4 @@
 .memory-ratings.awaiting-reveal{visibility:hidden;pointer-events:none}
 .flash-answer-slot:focus-visible{outline:3px solid #2180df;outline-offset:2px}
 @media(max-width:650px){.flashcard.stable-card{height:570px;min-height:570px;padding:17px 16px;grid-template-rows:26px 150px 74px minmax(0,1fr) 48px;gap:8px}.stable-card .flash-visual{height:150px}.stable-card .card-art .vocab-scene,.stable-card.revealed .card-art .vocab-scene{height:115px}.stable-card .flash-answer-slot{padding:11px 12px}.stable-card>h2{max-height:74px}.flash-navigation{margin-top:20px}}
+@media(max-width:650px){.deck-sidebar:not(.expanded) .deck-stats,.deck-sidebar:not(.expanded)>a.button{display:none}.deck-sidebar:not(.expanded){padding:16px 20px}.deck-sidebar:not(.expanded) h2{margin-bottom:12px}.flash-howto{margin-top:0}}
