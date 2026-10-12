@@ -11,7 +11,7 @@ export class JustinMiniController {
  constructor(host,options={}){
   this.host=host;this.options=options;this.state=new JustinMiniStateMachine();this.disposed=false;this.visible=true;this.frame=0;this.level=0;this.timer=null;
   this.notify=text=>{options.onStatus?.(text,this.state.current);};this.audio=new JustinMiniAudioController();this.voice=new JustinMiniVoiceRepeatManager(this.state,this.audio,this.notify);
-  this.state.addEventListener('change',e=>{this.animation?.play(STATE_CLIPS[e.detail]);if(this.restPosition){this.model.position.copy(this.restPosition);this.model.scale.copy(this.restScale);this.model.rotation.set(0,this.restYaw||0,0);if(e.detail==='Sleeping'){this.model.rotation.z=-1.45;this.model.rotation.y=0;this.model.scale.multiplyScalar(.78);}}if(this.bed)this.bed.visible=false;this.groundSleep=e.detail==='Sleeping';this.notify(STATUS[e.detail]);host.dataset.petState=e.detail;});
+  this.state.addEventListener('change',e=>{this.animation?.play(STATE_CLIPS[e.detail]);if(this.restPosition){this.model.position.copy(this.restPosition);this.model.scale.copy(this.restScale);this.model.rotation.set(0,this.restYaw||0,0);if(e.detail==='Sleeping'){this.model.rotation.z=-1.45;this.model.rotation.y=0;this.model.scale.multiplyScalar(.78);}}if(this.bed)this.bed.visible=false;this.groundSleep=e.detail==='Sleeping';if(this.groundSleep&&this.bed){this.animation.update(0);settleOnBed(this.model,this.bed);this.groundSleep=false;}this.notify(STATUS[e.detail]);host.dataset.petState=e.detail;});
   this.visibility=()=>{if(document.hidden){this.voice.cancel();cancelAnimationFrame(this.frame);}else this.loop(performance.now());};document.addEventListener('visibilitychange',this.visibility);
  }
  async load(){
