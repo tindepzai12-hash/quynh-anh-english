@@ -82,6 +82,8 @@ app.use('/api',async(req,res)=>{
   if(req.method==='POST'&&(!req.body||typeof req.body!=='object'||Array.isArray(req.body)))return res.status(400).json({error:'Dữ liệu không hợp lệ.'});
   if(cloud&&req.path.startsWith('/reading-admin/'))return res.status(403).json({error:'Studio nguồn chỉ mở trên máy cá nhân có khóa quản trị.'});
   const user=await identify(req);
+  // Signed-in learners use automatic presence; old clients cannot disable it.
+  if(req.path==='/online'&&req.method==='POST'&&user)req.body={...req.body,action:'on'};
   const readonly=['/catalog','/state','/ai-status','/knowledge-status','/reading-list'].includes(req.path)&&req.method==='GET';
   if(cloud&&!user&&!readonly)return res.status(configured?401:503).json({error:configured?'Đăng nhập để lưu và học tiếp.':'Đồng bộ tài khoản chưa kết nối. Bản online chỉ xem trước; tiến trình trên máy vẫn được giữ.'});
   const id=user?.id||'local-guest';
