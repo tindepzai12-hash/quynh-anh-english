@@ -1,0 +1,3 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {validOAuthCallback as valid} from '../../node/oauth-state.mjs';
+test('social callback requires matching fresh state including timestamp',()=>{const s={oauthState:'same',oauthAt:1000};assert.equal(valid(s,'same',2000),true);for(const query of [undefined,'wrong','',['same']])assert.equal(valid(s,query,2000),false);assert.equal(valid(s,'same',602000),false);assert.equal(valid(s,'same',500),false);assert.equal(valid({oauthState:'same'},'same',2000),false)});
+test('email recovery remains valid without social state; unsolicited state fails',()=>{assert.equal(valid({},undefined,2000),true);assert.equal(valid({},'unrequested',2000),false)});
