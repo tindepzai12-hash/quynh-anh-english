@@ -30,6 +30,7 @@ const engine=new Engine();await engine.ready;
 const app=express();if(cloud)app.set('trust proxy',1);
 app.disable('x-powered-by');
 app.use(helmet({contentSecurityPolicy:false,crossOriginEmbedderPolicy:false}));
+app.use('/api/speaking-feedback',express.json({limit:'9mb',type:'application/json'}));
 app.use(express.json({limit:'1mb',type:['application/json','text/plain']}));
 app.use((req,res,next)=>{if(req.path.startsWith('/api/')||req.path.startsWith('/auth/'))res.set('Cache-Control','no-store');next()});
 app.get('/api/health',(req,res)=>res.json({ok:true,runtime:'node',accounts:configured,mode:cloud?'cloud':'local'}));
@@ -76,7 +77,7 @@ app.post('/auth/import-guest',async(req,res)=>{const user=await identify(req);if
 app.post('/auth/export',async(req,res)=>{const user=await identify(req);const row=user?await persistent.read(user.id):!cloud?await local.read():null;if(!row)return res.status(401).json({error:'Đăng nhập để xuất dữ liệu.'});const active=[...Object.values(row.body.exams||{}),...Object.values(row.body.writingExams||{}),...Object.values(row.body.readingSessions||{})].some(e=>e.mode==='exam'&&!e.submitted&&e.deadline>Date.now()/1000);if(active)return res.status(403).json({error:'Kết thúc bài thi trước khi xuất lịch sử.'});const body=structuredClone(row.body);delete body.guestBackups;res.json({schema:1,exportedAt:new Date().toISOString(),learning:body})});
 app.post('/auth/delete-account',requireConfigured,async(req,res)=>{const user=await identify(req);if(!user||req.body.confirm!=='DELETE'||Date.now()-req.session.authAt>5*60*1000)return res.status(403).json({error:'Đăng nhập lại và xác nhận xóa tài khoản trước.'});const {error}=await admin.auth.admin.deleteUser(user.id);if(error)throw Error('Chưa xóa được tài khoản.');req.session.destroy();res.json({ok:true})});
 
-app.use(['/api/tutor','/api/writing-feedback','/api/listening-feedback'],rateLimit({windowMs:15*60*1000,limit:20,standardHeaders:'draft-8',legacyHeaders:false,message:{error:'Bạn đã gửi nhiều yêu cầu AI. Hãy chờ một chút rồi thử lại.'}}));
+app.use(['/api/tutor','/api/writing-feedback','/api/listening-feedback','/api/speaking-feedback'],rateLimit({windowMs:15*60*1000,limit:20,standardHeaders:'draft-8',legacyHeaders:false,message:{error:'Bạn đã gửi nhiều yêu cầu AI. Hãy chờ một chút rồi thử lại.'}}));
 app.use('/api',async(req,res)=>{
   if(!['GET','POST'].includes(req.method))return res.status(405).json({error:'Phương thức không được hỗ trợ.'});
   if(req.method==='POST'&&(!req.body||typeof req.body!=='object'||Array.isArray(req.body)))return res.status(400).json({error:'Dữ liệu không hợp lệ.'});

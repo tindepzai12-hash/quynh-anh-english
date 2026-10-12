@@ -7,16 +7,18 @@ def status():
     model=os.environ.get('GEMINI_MODEL' if provider=='gemini' else 'OPENAI_MODEL','')
     return dict(configured=provider in ('gemini','openai') and bool(key and re.fullmatch(r'[A-Za-z0-9._-]{1,100}',model)),provider=provider if provider in ('gemini','openai') else None,model=model if re.fullmatch(r'[A-Za-z0-9._-]{1,100}',model) else None)
 
-def generate(instruction,messages,timeout=60):
+def generate(instruction,messages,timeout=60,max_tokens=4096,audio=None):
     s=status()
     if not s['configured']: raise ValueError('AI chưa kết nối. Cần API key và model được cấu hình riêng trên máy chủ.')
     if s['provider']=='gemini':
         contents=[dict(role='model' if m['role']=='assistant' else 'user',parts=[dict(text=m['content'])]) for m in messages]
-        payload=dict(systemInstruction=dict(parts=[dict(text=instruction)]),contents=contents,generationConfig=dict(maxOutputTokens=4096,temperature=.25))
+        if audio:contents[-1]['parts'].append(dict(inlineData=dict(mimeType=audio['mime'],data=audio['data'])))
+        payload=dict(systemInstruction=dict(parts=[dict(text=instruction)]),contents=contents,generationConfig=dict(maxOutputTokens=max_tokens,temperature=.25))
         url='https://generativelanguage.googleapis.com/v1beta/models/'+s['model']+':generateContent'
         headers={'x-goog-api-key':os.environ['GEMINI_API_KEY'],'Content-Type':'application/json'}
     else:
-        payload=dict(model=s['model'],instructions=instruction,input=messages,store=False,max_output_tokens=1800)
+        if audio:raise ValueError('Nhận xét âm thanh hiện cần Gemini. Bạn có thể gửi bản chép lời để nhận xét nội dung.')
+        payload=dict(model=s['model'],instructions=instruction,input=messages,store=False,max_output_tokens=min(max_tokens,1800))
         url='https://api.openai.com/v1/responses'
         headers={'Authorization':'Bearer '+os.environ['OPENAI_API_KEY'],'Content-Type':'application/json'}
     request=urllib.request.Request(url,data=json.dumps(payload).encode(),headers=headers,method='POST')

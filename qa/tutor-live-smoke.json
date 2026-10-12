@@ -1,0 +1,103 @@
+[
+  {
+    "feature": "coach",
+    "ok": true,
+    "seconds": 12.09,
+    "result": {
+      "text": "Dựa trên dữ liệu hiện tại, bạn chưa thực hiện bài kiểm tra Writing nào và kết quả Reading đạt 6/10 câu đúng. Để cải thiện, mình đề xuất bạn bắt đầu với một bài viết Task 1 theo hướng dẫn trong [guide-writing] để làm quen với cách nêu overview và chọn lọc số liệu. Sau đó, chúng ta sẽ cùng phân tích lỗi dùng từ và ngữ pháp từ bài viết đó. Bạn đang đặt mục tiêu đạt band điểm cụ thể nào cho kỳ thi sắp tới không?",
+      "personal": true,
+      "sources": [
+        {
+          "id": "guide-writing",
+          "title": "Sổ tay Justin · Writing · tự biên soạn",
+          "page": 1,
+          "href": "/tutor-guide.html#writing"
+        }
+      ]
+    }
+  },
+  {
+    "feature": "writing",
+    "ok": true,
+    "seconds": 15.34,
+    "result": {
+      "text": "Chào Quỳnh Anh, mình là Justin. Mình đã đọc đoạn văn của bạn về việc học nhóm. Dưới đây là nhận xét chi tiết để giúp bạn cải thiện bài viết này nhé.\n\n### Task Achievement/Response\n*   **Nhận xét:** Bạn đã trả lời được câu hỏi (có ích hay không) và đưa ra được cả hai góc nhìn (lợi ích và hạn chế). Tuy nhiên, bài viết còn quá ngắn, chưa phát triển đủ các luận điểm để thuyết phục người đọc.\n*   **Bằng chứng:** Bạn chỉ mới nêu ý tưởng mà chưa giải thích *tại sao* việc chia sẻ ý tưởng lại giúp ích, hay *tại sao* sự tập trung lại quan trọng.\n*   **Đề xuất:** Với mỗi luận điểm, bạn nên thêm một câu giải thích (Why/How) và một ví dụ cụ thể.\n\n### Coherence & Cohesion\n*   **Nhận xét:** Các câu có sự liên kết cơ bản nhờ từ nối \"However\". Tuy nhiên, cấu trúc bài chưa rõ ràng theo dạng đoạn văn học thuật (Topic sentence - Supporting sentences - Concluding sentence).\n*   **Bằng chứng:** Câu cuối \"A group should have a clear goal...\" hơi bị tách biệt, chưa kết nối chặt chẽ với ý kiến cá nhân của bạn ở câu đầu.\n*   **Đề xuất:** Hãy gom các ý ủng hộ vào một đoạn, các ý phản đối vào một đoạn khác để người đọc dễ theo dõi.\n\n### Lexical Resource\n*   **Nhận xét:** Từ vựng đơn giản, dễ hiểu nhưng còn thiếu các từ nối hoặc cụm từ chuyên dụng cho bài viết học thuật.\n*   **Bằng chứng:** \"Students can sharing ideas\" (lỗi ngữ pháp) và \"difficult problems\".\n*   **Đề xuất:** Thay vì dùng \"sharing\", hãy dùng \"share\" hoặc \"exchange ideas\". Thay vì \"difficult problems\", bạn có thể dùng \"complex concepts\" hoặc \"challenging topics\" để bài viết chuyên nghiệp hơn.\n\n### Grammatical Range & Accuracy\n*   **Nhận xét:** Có lỗi sai về cấu trúc động từ sau trợ động từ/động từ khuyết thiếu.\n*   **Bằng chứng:** \"Students can sharing ideas\".\n*   **Đề xuất:** Sau \"can\" phải là động từ nguyên thể (bare infinitive). Sửa thành: \"Students can **share** ideas\". Ngoài ra, hãy chú ý chia động từ: \"I think **studying** in a group is useful\" (dùng danh động từ làm chủ ngữ).\n\n---\n\n### 3 ưu tiên sửa bài:\n1.  **Sửa lỗi ngữ pháp cơ bản:** Luôn kiểm tra cấu trúc \"Can + V-nguyên thể\" và cách dùng danh động từ (V-ing) làm chủ ngữ.\n2.  **Mở rộng ý:** Với mỗi ý bạn đưa ra, hãy tự hỏi \"Tại sao?\" và viết thêm 1-2 câu giải thích.\n3.  **Cấu trúc đoạn:** Tập thói quen viết câu chủ đề (Topic sentence) ở đầu mỗi đoạn để định hướng nội dung cho đoạn đó.\n\n**Bài tập nhỏ cho bạn:**\nBạn hãy thử viết lại câu: *\"Students can sharing ideas and explain difficult problems together\"* thành một câu hoàn chỉnh hơn, có giải thích lý do. Ví dụ: *\"Studying in a group allows students to share diverse perspectives, which helps them grasp complex concepts more easily.\"* \n\nBạn thử viết thêm 2 câu giải thích cho ý \"some people prefer a quiet place\" xem sao nhé?",
+      "task": "task2",
+      "estimated": false,
+      "band": null
+    }
+  },
+  {
+    "feature": "listening",
+    "ok": true,
+    "seconds": 15.94,
+    "result": {
+      "accuracy": 71,
+      "errors": 2,
+      "referenceWords": 7,
+      "exact": false,
+      "edits": [
+        {
+          "kind": "correct",
+          "expected": "the",
+          "actual": "the"
+        },
+        {
+          "kind": "correct",
+          "expected": "library",
+          "actual": "library"
+        },
+        {
+          "kind": "replace",
+          "expected": "opens",
+          "actual": "open"
+        },
+        {
+          "kind": "correct",
+          "expected": "at",
+          "actual": "at"
+        },
+        {
+          "kind": "replace",
+          "expected": "nine",
+          "actual": "night"
+        },
+        {
+          "kind": "correct",
+          "expected": "on",
+          "actual": "on"
+        },
+        {
+          "kind": "correct",
+          "expected": "monday",
+          "actual": "monday"
+        }
+      ],
+      "method": "Đối chiếu từ với transcript bạn cung cấp; bỏ qua hoa/thường và dấu câu. Không quy đổi band IELTS.",
+      "text": "Chào Quỳnh Anh, mình là Justin đây. Mình đã xem qua bài chép chính tả của bạn. Dưới đây là 2 lỗi cụ thể cần điều chỉnh:\n\n1. **Bạn viết:** open → **Transcript:** opens → **Cần chú ý:** Động từ chia theo ngôi thứ ba số ít (The library). Bạn nhớ thêm đuôi \"-s\" nhé.\n2. **Bạn viết:** night → **Transcript:** nine → **Cần chú ý:** Đây là lỗi nghe nhầm từ. \"Nine\" (số 9) và \"night\" (đêm) có âm cuối khác nhau.\n\n*Lưu ý:* Việc phân biệt âm cuối /n/ và /t/ là giả thuyết dựa trên văn bản, bạn cần nghe lại audio để xác minh cách phát âm của người nói.\n\n**Kế hoạch luyện tập cho bạn:**\n1. **Nghe không nhìn chữ:** Nghe lại câu này 3 lần mà không nhìn transcript để tập trung vào âm thanh thực tế.\n2. **Kiểm tra:** Mở transcript ra đối chiếu xem mình đã nghe đúng \"nine\" chưa.\n3. **Nói nhại (Shadowing):** Nhại lại câu này 5 lần, chú ý nhấn mạnh âm \"-s\" ở từ \"opens\" và âm cuối của từ \"nine\".\n4. **Gõ lại:** Sau khi đã quen, hãy gõ lại câu này một lần nữa mà không nhìn tài liệu.\n\nNếu bạn đã nắm vững, lần tới mình có thể thử sức với một câu dài hơn hoặc có tốc độ nói nhanh hơn nhé. Bạn làm tốt lắm, tiếp tục phát huy!",
+      "provider": "gemini"
+    }
+  },
+  {
+    "feature": "speaking-text",
+    "ok": true,
+    "seconds": 12.63,
+    "result": {
+      "text": "Chào bạn, mình là Justin. Rất vui được hỗ trợ bạn cải thiện kỹ năng Speaking. Dưới đây là nhận xét cho phần trả lời của bạn:\n\n**1. Điều làm tốt:**\nBạn đã trả lời trực tiếp vào câu hỏi và đưa ra được lý do tại sao bạn thích học ở thư viện (yên tĩnh, tập trung làm bài tập). Cấu trúc câu đơn giản, dễ hiểu và truyền tải được thông tin cơ bản một cách mạch lạc.\n\n**2. Điều cần sửa:**\n- **Ngữ pháp:** Cụm \"I like study\" chưa chính xác. Sau \"like\", bạn nên dùng V-ing hoặc \"to V\".\n- **Từ vựng:** Câu trả lời còn khá ngắn. Để đạt hiệu quả cao hơn, bạn nên mở rộng ý bằng cách mô tả không gian thư viện hoặc cảm giác của bạn khi ở đó.\n- **Sự đa dạng:** Bạn có thể sử dụng các từ nối (linking words) để các câu văn kết nối với nhau tự nhiên hơn thay vì các câu đơn đứng tách biệt.\n\n**3. Câu sửa mẫu:**\nThay vì nói \"I like study in the library\", bạn có thể nói:\n*\"I prefer studying in the library because it provides a tranquil atmosphere that helps me concentrate on my assignments. Usually, I head there with my friends right after school to keep each other motivated.\"*\n\n**4. Bài luyện 2 phút:**\nHãy thử mở rộng câu trả lời của bạn bằng cách trả lời thêm các câu hỏi phụ sau:\n- Thư viện đó trông như thế nào? (Ví dụ: rộng rãi, có nhiều cửa sổ, nhiều sách...)\n- Bạn thường làm gì ở đó ngoài việc làm bài tập? (Ví dụ: đọc sách giải trí, thảo luận nhóm...)\n- Tại sao bạn không chọn học ở nhà? (Ví dụ: ở nhà dễ bị xao nhãng bởi điện thoại hoặc gia đình).\n\nHãy thử viết lại một đoạn dài hơn (khoảng 5-7 câu) dựa trên những gợi ý này nhé! Chúc bạn luyện tập hiệu quả.",
+      "inputMode": "text",
+      "band": null,
+      "provider": "gemini"
+    }
+  },
+  {
+    "feature": "speaking-audio",
+    "ok": true,
+    "seconds": 11.86,
+    "result": {
+      "text": "Chào bạn, mình là Justin. Dưới đây là nhận xét cho bài nói của bạn:\n\n**1. Điều làm tốt:**\nBạn đã trả lời đúng trọng tâm câu hỏi và sử dụng cấu trúc câu đơn giản, rõ ràng. Việc sử dụng các từ nối như \"and\" giúp câu văn có sự liên kết. Bạn cũng đã đưa ra được lý do tại sao mình thích học ở thư viện (\"It is quiet and I can focus on my homework\"), điều này giúp câu trả lời có chiều sâu hơn.\n\n**2. Điều cần sửa:**\nCâu trả lời của bạn hiện tại còn khá ngắn. Để bài nói tự nhiên và đạt hiệu quả cao hơn, bạn nên mở rộng thêm thông tin. Ví dụ, bạn có thể mô tả không gian thư viện (có nhiều sách, ánh sáng tốt, hay có bạn bè cùng học), hoặc cảm giác của bạn khi ở đó. Việc thêm các chi tiết này sẽ giúp người nghe hình dung rõ hơn về nơi bạn học.\n\n**3. Câu sửa mẫu:**\nThay vì chỉ nói: \"I like studying in the library. It is quiet and I can focus on my homework\", bạn có thể nói:\n\"I prefer studying in the library because it’s incredibly quiet and peaceful, which helps me stay focused on my homework. Plus, the library has a vast collection of books and a comfortable atmosphere, making it the perfect environment for me to study effectively after school.\"\n\n**4. Bài luyện 2 phút:**\nHãy thử mở rộng câu trả lời của bạn bằng cách trả lời các câu hỏi phụ sau:\n- Thư viện đó nằm ở đâu? (Gần nhà hay trong trường?)\n- Bạn thường ngồi ở đâu trong thư viện? (Góc cửa sổ, bàn dài, hay khu vực yên tĩnh?)\n- Bạn thường học ở đó bao lâu?\n- Bạn có hay đi cùng bạn bè không hay thích học một mình?\n\nHãy thử ghi âm lại một đoạn dài hơn (khoảng 1 phút) dựa trên những gợi ý này nhé!",
+      "inputMode": "audio",
+      "band": null,
+      "provider": "gemini"
+    }
+  }
+]

@@ -2,7 +2,7 @@
 import argparse, json, mimetypes, os, re, sqlite3, time, unicodedata
 import uuid
 from contextlib import closing
-import ai_tutor, ai_provider, listening_practice
+import ai_tutor, ai_provider, listening_practice, speaking_feedback
 import ecosystem, knowledge, exams, writing_exams, reading_engine, reading_import, hmac, base64, hashlib
 import srs
 from datetime import date, timedelta
@@ -94,7 +94,7 @@ class Handler(BaseHTTPRequestHandler):
                 s['onlineStatus']=ecosystem.online(s,{},time.time())
                 s['serverNow']=time.time()
                 if exams.active(s,time.time()):
-                    s.pop('chatHistory',None);s.pop('writingFeedback',None)
+                    s.pop('chatHistory',None);s.pop('writingFeedback',None);s.pop('listeningFeedback',None);s.pop('speakingFeedback',None)
                     for a in s['attempts']:
                         a.update(answers=[],key=[],correct=[],explanations=[]);a.pop('rows',None)
                     for e in s.get('exams',{}).values(): e.pop('result',None)
@@ -143,7 +143,7 @@ class Handler(BaseHTTPRequestHandler):
         if not self.allowed(): return self.reply({'error':'Host/origin không hợp lệ'},403)
         try:
             size=int(self.headers.get('Content-Length','0'))
-            limit=28000000 if urlparse(self.path).path.startswith('/api/reading-admin/') else 1000000
+            limit=28000000 if urlparse(self.path).path.startswith('/api/reading-admin/') else 9000000 if urlparse(self.path).path=='/api/speaking-feedback' else 1000000
             if size<1 or size>limit: raise ValueError('Yêu cầu quá lớn hoặc trống')
             body=json.loads(self.rfile.read(size)); route=urlparse(self.path).path
             if not isinstance(body,dict): raise ValueError('Dữ liệu không hợp lệ')
@@ -187,7 +187,7 @@ class Handler(BaseHTTPRequestHandler):
                 if action=='review':return self.reply(READING.review(body['id'],body['version'],body.get('reviewer'),body.get('questionIds'),body.get('acknowledgeSource') is True))
                 if action=='publish':return self.reply(READING.publish(body['id'],body['version'],'authenticated-editor'))
                 raise ValueError('Thao tác studio không tồn tại.')
-            if route in ('/api/tutor','/api/knowledge','/api/lesson-overview','/api/writing-feedback','/api/listening-check','/api/listening-feedback'):
+            if route in ('/api/tutor','/api/knowledge','/api/lesson-overview','/api/writing-feedback','/api/listening-check','/api/listening-feedback','/api/speaking-feedback'):
                 with closing(sqlite3.connect(DB)) as db:
                     current=json.loads(db.execute('SELECT body FROM state WHERE id=1').fetchone()[0])
                 if exams.active(current,time.time()): return self.reply({'error':'Hỏi đáp và học liệu hỗ trợ bị tắt khi đang thi.'},403)
@@ -196,16 +196,21 @@ class Handler(BaseHTTPRequestHandler):
                 elif route=='/api/writing-feedback': result=ai_tutor.writing_feedback(body)
                 elif route=='/api/listening-check': return self.reply(listening_practice.check(body))
                 elif route=='/api/listening-feedback': result=listening_practice.feedback(body)
-                else: result=ai_tutor.answer(DATA,body,BASE,KNOWLEDGE)
+                elif route=='/api/speaking-feedback': result=speaking_feedback.feedback(body)
+                else: result=ai_tutor.answer(DATA,body,BASE,KNOWLEDGE,current)
                 with closing(sqlite3.connect(DB,timeout=10)) as db, db:
                     db.execute('BEGIN IMMEDIATE')
                     s=json.loads(db.execute('SELECT body FROM state WHERE id=1').fetchone()[0])
                     if exams.active(s,time.time()): return self.reply({'error':'Phiên thi đã bắt đầu; nhận xét và hỏi đáp được tạm ẩn.'},403)
-                    if route=='/api/listening-feedback':
+                    if route=='/api/speaking-feedback':
+                        s.setdefault('speakingFeedback',[]).append(dict(date=time.time(),text=result['text'],inputMode=result['inputMode']))
+                        s['speakingFeedback']=s['speakingFeedback'][-30:]
+                    elif route=='/api/listening-feedback':
                         s.setdefault('listeningFeedback',[]).append(dict(date=time.time(),text=result['text'],accuracy=result['accuracy']))
                         s['listeningFeedback']=s['listeningFeedback'][-30:]
                     elif route=='/api/writing-feedback':
                         s.setdefault('writingFeedback',[]).append(dict(task=body['task'],date=time.time(),text=result['text']))
+                        s['writingFeedback']=s['writingFeedback'][-30:]
                     else:
                         s.setdefault('chatHistory',[]).append(dict(mode='search' if route=='/api/knowledge' else 'ai',query=body.get('query',body.get('question','')),lesson=body.get('lesson',body.get('id')),date=time.time(),result=result))
                         s['chatHistory']=s['chatHistory'][-50:]
