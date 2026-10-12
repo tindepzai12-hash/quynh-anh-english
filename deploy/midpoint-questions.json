@@ -1,0 +1,1042 @@
+{
+  "combined-listening-1": {
+    "version": 2,
+    "at": 317.05,
+    "prompt": "Before an IELTS Listening recording starts, what is most useful?",
+    "options": [
+      "Read the questions and predict the kind of answer.",
+      "Write a complete essay.",
+      "Ignore the questions until the end.",
+      "Predict the exact words and stop listening once you hear them."
+    ],
+    "correct": 0,
+    "explanation": "Prediction helps you listen for relevant details.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      null,
+      "“Write a complete essay.” is not a valid approach here. Prediction helps you listen for relevant details. The appropriate response is: Read the questions and predict the kind of answer.",
+      "“Ignore the questions until the end.” is not a valid approach here. Prediction helps you listen for relevant details. The appropriate response is: Read the questions and predict the kind of answer.",
+      "Prediction is a guide, not an answer. You still need to check what the speaker actually says."
+    ]
+  },
+  "combined-listening-2": {
+    "version": 2,
+    "at": 228.81,
+    "prompt": "A note says “Name: ___”. Which kind of detail should you listen for?",
+    "options": [
+      "The speaker’s age only.",
+      "A person’s name, including its spelling.",
+      "Write any familiar name even if the spelling is different.",
+      "An opinion about the topic."
+    ],
+    "correct": 1,
+    "explanation": "The label tells you what kind of detail is needed.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "“The speaker’s age only.” is not a valid approach here. The label tells you what kind of detail is needed. The appropriate response is: A person’s name, including its spelling.",
+      null,
+      "A familiar name is not evidence. Listen to the name and any spelling given.",
+      "“An opinion about the topic.” is not a valid approach here. The label tells you what kind of detail is needed. The appropriate response is: A person’s name, including its spelling."
+    ]
+  },
+  "combined-listening-3": {
+    "version": 2,
+    "at": 472.06,
+    "prompt": "In a lecture, what helps you follow a note-completion task?",
+    "options": [
+      "Choose words before hearing the recording.",
+      "Assume each heading needs the same number of words.",
+      "Write every sentence you hear.",
+      "Use the note headings to follow the lecture structure."
+    ],
+    "correct": 3,
+    "explanation": "Headings help you locate the relevant part of a lecture.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "“Choose words before hearing the recording.” is not a valid approach here. Headings help you locate the relevant part of a lecture. The appropriate response is: Use the note headings to follow the lecture structure.",
+      "Each gap has its own context and instructions; headings do not set a common answer length.",
+      "“Write every sentence you hear.” is not a valid approach here. Headings help you locate the relevant part of a lecture. The appropriate response is: Use the note headings to follow the lecture structure.",
+      null
+    ]
+  },
+  "combined-listening-4": {
+    "version": 2,
+    "at": 323.38,
+    "prompt": "What should you identify first on a listening map?",
+    "options": [
+      "Treat left and right as fixed regardless of the speaker’s direction.",
+      "Your starting point and the map’s orientation.",
+      "The longest place name.",
+      "The colour of the map."
+    ],
+    "correct": 1,
+    "explanation": "A starting point and direction help you track the route.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "Left and right depend on the route and orientation, so establish where the speaker is facing.",
+      null,
+      "“The longest place name.” is not a valid approach here. A starting point and direction help you track the route. The appropriate response is: Your starting point and the map’s orientation.",
+      "“The colour of the map.” is not a valid approach here. A starting point and direction help you track the route. The appropriate response is: Your starting point and the map’s orientation."
+    ]
+  },
+  "combined-listening-5": {
+    "version": 2,
+    "at": 363.58,
+    "prompt": "Two options use words you heard. How should you choose?",
+    "options": [
+      "Always choose the first matching word.",
+      "Choose the longest option.",
+      "Check which option matches the speaker’s full meaning.",
+      "Ignore a speaker’s correction because the first detail is always final."
+    ],
+    "correct": 2,
+    "explanation": "Matching a word alone does not prove that an option is correct.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "“Always choose the first matching word.” is not a valid approach here. Matching a word alone does not prove that an option is correct. The appropriate response is: Check which option matches the speaker’s full meaning.",
+      "“Choose the longest option.” is not a valid approach here. Matching a word alone does not prove that an option is correct. The appropriate response is: Check which option matches the speaker’s full meaning.",
+      null,
+      "Speakers may correct themselves. The final intended meaning determines the answer."
+    ]
+  },
+  "combined-listening-6": {
+    "version": 2,
+    "at": 292.71,
+    "prompt": "A task says “Choose TWO letters”. What should you select?",
+    "options": [
+      "Exactly two options supported by the recording.",
+      "Every option mentioned.",
+      "Choose three options if all three sound reasonable.",
+      "Only one option."
+    ],
+    "correct": 0,
+    "explanation": "Follow the number of answers specified in the instructions.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      null,
+      "“Every option mentioned.” is not a valid approach here. Follow the number of answers specified in the instructions. The appropriate response is: Exactly two options supported by the recording.",
+      "The task asks for two. Plausibility does not override the stated number of answers.",
+      "“Only one option.” is not a valid approach here. Follow the number of answers specified in the instructions. The appropriate response is: Exactly two options supported by the recording."
+    ]
+  },
+  "combined-listening-7": {
+    "version": 2,
+    "at": 247.91,
+    "prompt": "What is important in a matching-information listening task?",
+    "options": [
+      "Use your personal preference.",
+      "Match an item whenever its keyword is mentioned, regardless of context.",
+      "Connect each item with the relevant detail in the recording.",
+      "Choose by alphabetical order."
+    ],
+    "correct": 2,
+    "explanation": "The recording provides the evidence for each match.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "“Use your personal preference.” is not a valid approach here. The recording provides the evidence for each match. The appropriate response is: Connect each item with the relevant detail in the recording.",
+      "The relevant detail may be paraphrased or corrected; a keyword alone is not sufficient.",
+      null,
+      "“Choose by alphabetical order.” is not a valid approach here. The recording provides the evidence for each match. The appropriate response is: Connect each item with the relevant detail in the recording."
+    ]
+  },
+  "combined-listening-8": {
+    "version": 2,
+    "at": 148.88,
+    "prompt": "What is a useful way to review a listening mistake?",
+    "options": [
+      "Replay the whole test without checking any incorrect answer.",
+      "Only memorise the answer letter.",
+      "Avoid that question type forever.",
+      "Replay the relevant part and identify why the answer was missed."
+    ],
+    "correct": 3,
+    "explanation": "Review the evidence and the cause of the mistake.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "Replay is most useful when you locate the missed detail and understand the error.",
+      "“Only memorise the answer letter.” is not a valid approach here. Review the evidence and the cause of the mistake. The appropriate response is: Replay the relevant part and identify why the answer was missed.",
+      "“Avoid that question type forever.” is not a valid approach here. Review the evidence and the cause of the mistake. The appropriate response is: Replay the relevant part and identify why the answer was missed.",
+      null
+    ]
+  },
+  "combined-reading-1": {
+    "version": 2,
+    "at": 316.46,
+    "prompt": "To find a specific date in a reading passage, which technique helps?",
+    "options": [
+      "Guess from your own knowledge.",
+      "Scan for the date and read the surrounding context.",
+      "Read every word at the same speed.",
+      "Stop scanning as soon as you see any number."
+    ],
+    "correct": 1,
+    "explanation": "Scanning locates a detail; the surrounding sentence confirms it.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "“Guess from your own knowledge.” is not a valid approach here. Scanning locates a detail; the surrounding sentence confirms it. The appropriate response is: Scan for the date and read the surrounding context.",
+      null,
+      "“Read every word at the same speed.” is not a valid approach here. Scanning locates a detail; the surrounding sentence confirms it. The appropriate response is: Scan for the date and read the surrounding context.",
+      "A number must match the detail being asked about. Read its context before choosing."
+    ]
+  },
+  "combined-reading-2": {
+    "version": 2,
+    "at": 324.6,
+    "prompt": "A gap-fill task says “ONE WORD ONLY”. What must you check?",
+    "options": [
+      "Write a full sentence.",
+      "Use any synonym you prefer.",
+      "Use two words if they express the idea more clearly.",
+      "Use one word that fits both the passage and the gap."
+    ],
+    "correct": 3,
+    "explanation": "Follow the word limit and the task’s answer instructions.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "“Write a full sentence.” is not a valid approach here. Follow the word limit and the task’s answer instructions. The appropriate response is: Use one word that fits both the passage and the gap.",
+      "“Use any synonym you prefer.” is not a valid approach here. Follow the word limit and the task’s answer instructions. The appropriate response is: Use one word that fits both the passage and the gap.",
+      "ONE WORD ONLY is a strict limit. A clearer two-word response still breaks the instruction.",
+      null
+    ]
+  },
+  "combined-reading-3": {
+    "version": 2,
+    "at": 409.13,
+    "prompt": "How do you confirm a reading multiple-choice answer?",
+    "options": [
+      "Find evidence in the passage that supports its meaning.",
+      "Reject any option that uses different words from the passage.",
+      "Choose the option with the most repeated words.",
+      "Choose what sounds true in real life."
+    ],
+    "correct": 0,
+    "explanation": "Your answer must be supported by the passage.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      null,
+      "A correct option can paraphrase the passage. Compare meaning, not just identical words.",
+      "“Choose the option with the most repeated words.” is not a valid approach here. Your answer must be supported by the passage. The appropriate response is: Find evidence in the passage that supports its meaning.",
+      "“Choose what sounds true in real life.” is not a valid approach here. Your answer must be supported by the passage. The appropriate response is: Find evidence in the passage that supports its meaning."
+    ]
+  },
+  "combined-reading-4": {
+    "version": 2,
+    "at": 395.87,
+    "prompt": "A passage gives no information about a statement. Which answer fits?",
+    "options": [
+      "Choose False whenever you cannot find evidence.",
+      "True.",
+      "Not Given.",
+      "False."
+    ],
+    "correct": 2,
+    "explanation": "False contradicts the text; Not Given means the required information is absent.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "A lack of evidence is Not Given. False requires information that contradicts the statement.",
+      "“True.” is not a valid approach here. False contradicts the text; Not Given means the required information is absent. The appropriate response is: Not Given.",
+      null,
+      "“False.” is not a valid approach here. False contradicts the text; Not Given means the required information is absent. The appropriate response is: Not Given."
+    ]
+  },
+  "combined-reading-5": {
+    "version": 2,
+    "at": 416.13,
+    "prompt": "What does a paragraph heading normally summarise?",
+    "options": [
+      "The paragraph’s main idea.",
+      "One small example only.",
+      "The final word in the paragraph.",
+      "Choose a heading because it repeats a word in the first sentence."
+    ],
+    "correct": 0,
+    "explanation": "A heading should capture the whole paragraph’s main purpose.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      null,
+      "“One small example only.” is not a valid approach here. A heading should capture the whole paragraph’s main purpose. The appropriate response is: The paragraph’s main idea.",
+      "“The final word in the paragraph.” is not a valid approach here. A heading should capture the whole paragraph’s main purpose. The appropriate response is: The paragraph’s main idea.",
+      "A repeated word may relate to a supporting detail; check the main idea of the paragraph."
+    ]
+  },
+  "combined-reading-6": {
+    "version": 2,
+    "at": 403.9,
+    "prompt": "When matching names with statements, what should guide the match?",
+    "options": [
+      "How short the person’s name is.",
+      "What the passage attributes to that person.",
+      "Assume everyone mentioned in the same paragraph holds the same view.",
+      "Whether you recognise the person."
+    ],
+    "correct": 1,
+    "explanation": "Use the views, findings or actions attributed in the passage.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "“How short the person’s name is.” is not a valid approach here. Use the views, findings or actions attributed in the passage. The appropriate response is: What the passage attributes to that person.",
+      null,
+      "The paragraph may contrast different people’s views. Track who each statement belongs to.",
+      "“Whether you recognise the person.” is not a valid approach here. Use the views, findings or actions attributed in the passage. The appropriate response is: What the passage attributes to that person."
+    ]
+  },
+  "combined-reading-7": {
+    "version": 2,
+    "at": 328.04,
+    "prompt": "A question asks which paragraph contains a detail. What are you seeking?",
+    "options": [
+      "A heading that sounds attractive.",
+      "Choose the paragraph whose main idea sounds closest, without finding the detail.",
+      "A paragraph of a certain length.",
+      "The specified information, even if it is not the main idea."
+    ],
+    "correct": 3,
+    "explanation": "Matching information focuses on a particular detail.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "“A heading that sounds attractive.” is not a valid approach here. Matching information focuses on a particular detail. The appropriate response is: The specified information, even if it is not the main idea.",
+      "This task asks for specific information. Locate that detail rather than relying on the general topic.",
+      "“A paragraph of a certain length.” is not a valid approach here. Matching information focuses on a particular detail. The appropriate response is: The specified information, even if it is not the main idea.",
+      null
+    ]
+  },
+  "combined-reading-8": {
+    "version": 2,
+    "at": 303.63,
+    "prompt": "For a short-answer reading question, what must you respect?",
+    "options": [
+      "Add extra explanation beyond the stated word limit.",
+      "The word limit and the evidence in the passage.",
+      "Your own background knowledge only.",
+      "A minimum of three sentences."
+    ],
+    "correct": 1,
+    "explanation": "Answer the question concisely within the stated limit.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "Extra words can invalidate a short answer. Give only the requested information within the limit.",
+      null,
+      "“Your own background knowledge only.” is not a valid approach here. Answer the question concisely within the stated limit. The appropriate response is: The word limit and the evidence in the passage.",
+      "“A minimum of three sentences.” is not a valid approach here. Answer the question concisely within the stated limit. The appropriate response is: The word limit and the evidence in the passage."
+    ]
+  },
+  "combined-reading-9": {
+    "version": 2,
+    "at": 146.97,
+    "prompt": "After reviewing a reading test, what is most helpful?",
+    "options": [
+      "Only look at the total score.",
+      "Repeat the same guesses.",
+      "Group mistakes by question type and check their evidence.",
+      "Assume every error means you need to read faster."
+    ],
+    "correct": 2,
+    "explanation": "Question-type review helps you choose what to practise next.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "“Only look at the total score.” is not a valid approach here. Question-type review helps you choose what to practise next. The appropriate response is: Group mistakes by question type and check their evidence.",
+      "“Repeat the same guesses.” is not a valid approach here. Question-type review helps you choose what to practise next. The appropriate response is: Group mistakes by question type and check their evidence.",
+      null,
+      "Errors can come from vocabulary, evidence or instructions. Diagnose the cause before changing speed."
+    ]
+  },
+  "combined-writing-task-2-2": {
+    "version": 2,
+    "at": 501.54,
+    "prompt": "What must a “Discuss both views” essay address?",
+    "options": [
+      "Both views presented in the question.",
+      "Only the view you prefer.",
+      "Mention the second view in one word but never explain it.",
+      "An unrelated experience."
+    ],
+    "correct": 0,
+    "explanation": "Discuss each view with relevant explanation and support.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      null,
+      "“Only the view you prefer.” is not a valid approach here. Discuss each view with relevant explanation and support. The appropriate response is: Both views presented in the question.",
+      "Discussing both views requires explanation of each, not merely naming the other side.",
+      "“An unrelated experience.” is not a valid approach here. Discuss each view with relevant explanation and support. The appropriate response is: Both views presented in the question."
+    ]
+  },
+  "combined-writing-task-2-3": {
+    "version": 2,
+    "at": 528.49,
+    "prompt": "A task asks you to discuss both views and give your opinion. What is required?",
+    "options": [
+      "Only list vocabulary.",
+      "Discuss both views but leave your own opinion unclear.",
+      "Discuss both views and state a clear personal position.",
+      "Avoid giving any opinion."
+    ],
+    "correct": 2,
+    "explanation": "The response must address all parts of the task.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "“Only list vocabulary.” is not a valid approach here. The response must address all parts of the task. The appropriate response is: Discuss both views and state a clear personal position.",
+      "The prompt explicitly asks for your opinion, so state and support a clear position.",
+      null,
+      "“Avoid giving any opinion.” is not a valid approach here. The response must address all parts of the task. The appropriate response is: Discuss both views and state a clear personal position."
+    ]
+  },
+  "combined-writing-task-2-4": {
+    "version": 2,
+    "at": 544.53,
+    "prompt": "What makes a problem–solution essay response relevant?",
+    "options": [
+      "Propose solutions that do not respond to the problems you identified.",
+      "List unrelated causes.",
+      "Describe a chart.",
+      "Explain the stated problem and propose connected solutions."
+    ],
+    "correct": 3,
+    "explanation": "A solution should respond to the problem identified.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "A relevant solution must address the actual problem discussed.",
+      "“List unrelated causes.” is not a valid approach here. A solution should respond to the problem identified. The appropriate response is: Explain the stated problem and propose connected solutions.",
+      "“Describe a chart.” is not a valid approach here. A solution should respond to the problem identified. The appropriate response is: Explain the stated problem and propose connected solutions.",
+      null
+    ]
+  },
+  "combined-writing-task-2-5": {
+    "version": 2,
+    "at": 446.54,
+    "prompt": "How can a proposed solution be developed in an essay?",
+    "options": [
+      "Add an unrelated statistic.",
+      "Explain who can act and how the action addresses the problem.",
+      "Repeat the word “solution”.",
+      "Name a solution but give no explanation of how it would help."
+    ],
+    "correct": 1,
+    "explanation": "A practical explanation develops the recommendation.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "“Add an unrelated statistic.” is not a valid approach here. A practical explanation develops the recommendation. The appropriate response is: Explain who can act and how the action addresses the problem.",
+      null,
+      "“Repeat the word “solution”.” is not a valid approach here. A practical explanation develops the recommendation. The appropriate response is: Explain who can act and how the action addresses the problem.",
+      "Develop the solution by explaining who can act, what they can do and why it addresses the problem."
+    ]
+  },
+  "combined-writing-task-2-6": {
+    "version": 2,
+    "at": 488.54,
+    "prompt": "An essay prompt contains two questions. What should your plan cover?",
+    "options": [
+      "Only the easier question.",
+      "Neither question directly.",
+      "Answer the second question only in the final sentence.",
+      "Both questions with relevant support."
+    ],
+    "correct": 3,
+    "explanation": "Your plan must address every part of the prompt.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "“Only the easier question.” is not a valid approach here. Your plan must address every part of the prompt. The appropriate response is: Both questions with relevant support.",
+      "“Neither question directly.” is not a valid approach here. Your plan must address every part of the prompt. The appropriate response is: Both questions with relevant support.",
+      "Both questions need developed answers; a brief mention may not adequately address the second.",
+      null
+    ]
+  },
+  "writing-writing-task-1-1": {
+    "version": 2,
+    "at": 176.17,
+    "prompt": "In Academic Writing Task 1, what are you mainly asked to do?",
+    "options": [
+      "Summarise visual information and its main features.",
+      "Explain why the data changed even when no causes are supplied.",
+      "Invent reasons for every figure.",
+      "Write a personal opinion essay."
+    ],
+    "correct": 0,
+    "explanation": "Describe the information shown and select the main features.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      null,
+      "Task 1 reports the visual information. Do not invent causes that the visual does not provide.",
+      "“Invent reasons for every figure.” is not a valid approach here. Describe the information shown and select the main features. The appropriate response is: Summarise visual information and its main features.",
+      "“Write a personal opinion essay.” is not a valid approach here. Describe the information shown and select the main features. The appropriate response is: Summarise visual information and its main features."
+    ]
+  },
+  "writing-writing-task-1-2": {
+    "version": 2,
+    "at": 394.24,
+    "prompt": "Which expression describes a large increase?",
+    "options": [
+      "Use “a sharp rise” for a very small change.",
+      "Remaining stable.",
+      "A sharp rise.",
+      "A slight decline."
+    ],
+    "correct": 2,
+    "explanation": "“Sharp” describes a pronounced change.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "Sharp indicates a large or pronounced increase; a small change is better described as slight.",
+      "“Remaining stable.” is not a valid approach here. “Sharp” describes a pronounced change. The appropriate response is: A sharp rise.",
+      null,
+      "“A slight decline.” is not a valid approach here. “Sharp” describes a pronounced change. The appropriate response is: A sharp rise."
+    ]
+  },
+  "writing-writing-task-1-3": {
+    "version": 2,
+    "at": 242.49,
+    "prompt": "Which sentence makes a clear comparison?",
+    "options": [
+      "A was twice as high as B.",
+      "A and B were something.",
+      "A rose yesterday, perhaps.",
+      "Say “A was twice B” without making clear what is being measured."
+    ],
+    "correct": 0,
+    "explanation": "A comparison makes the relationship between values explicit.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      null,
+      "“A and B were something.” is not a valid approach here. A comparison makes the relationship between values explicit. The appropriate response is: A was twice as high as B.",
+      "“A rose yesterday, perhaps.” is not a valid approach here. A comparison makes the relationship between values explicit. The appropriate response is: A was twice as high as B.",
+      "State the relevant measure, such as twice as high or twice as many, to make the comparison precise."
+    ]
+  },
+  "writing-writing-task-1-4": {
+    "version": 2,
+    "at": 534.32,
+    "prompt": "A line graph shows completed years in the past. Which tense is usually suitable?",
+    "options": [
+      "Imperative.",
+      "Past simple.",
+      "Use future tense for all figures from completed past years.",
+      "Future simple."
+    ],
+    "correct": 1,
+    "explanation": "Use tense that matches the time represented.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "“Imperative.” is not a valid approach here. Use tense that matches the time represented. The appropriate response is: Past simple.",
+      null,
+      "Completed past figures normally call for past tense, not future tense.",
+      "“Future simple.” is not a valid approach here. Use tense that matches the time represented. The appropriate response is: Past simple."
+    ]
+  },
+  "writing-writing-task-1-5": {
+    "version": 2,
+    "at": 432.75,
+    "prompt": "A graph includes future projections. How should you describe them?",
+    "options": [
+      "Present every projection as a completed fact.",
+      "Use “rose” for every future projection.",
+      "Ignore the time labels.",
+      "Make clear that the figures are predicted or projected."
+    ],
+    "correct": 3,
+    "explanation": "Distinguish projections from observed historical figures.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "“Present every projection as a completed fact.” is not a valid approach here. Distinguish projections from observed historical figures. The appropriate response is: Make clear that the figures are predicted or projected.",
+      "Rose presents a past change. Future projections should be marked as predicted or expected.",
+      "“Ignore the time labels.” is not a valid approach here. Distinguish projections from observed historical figures. The appropriate response is: Make clear that the figures are predicted or projected.",
+      null
+    ]
+  },
+  "writing-writing-task-1-6": {
+    "version": 2,
+    "at": 480.92,
+    "prompt": "A pie chart has no time change. What should you focus on?",
+    "options": [
+      "Describe the largest share as an increase even though there is only one time point.",
+      "Compare the proportions of its categories.",
+      "Invent a rising trend over time.",
+      "Explain your favourite category."
+    ],
+    "correct": 1,
+    "explanation": "A single-time chart supports comparisons, not an invented timeline.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "A large share is a comparison, not a change. An increase needs a time comparison.",
+      null,
+      "“Invent a rising trend over time.” is not a valid approach here. A single-time chart supports comparisons, not an invented timeline. The appropriate response is: Compare the proportions of its categories.",
+      "“Explain your favourite category.” is not a valid approach here. A single-time chart supports comparisons, not an invented timeline. The appropriate response is: Compare the proportions of its categories."
+    ]
+  },
+  "writing-writing-task-1-7": {
+    "version": 2,
+    "at": 412.41,
+    "prompt": "Two pie charts show different years. What comparison is useful?",
+    "options": [
+      "Only the colours used.",
+      "Only personal opinions.",
+      "How each category’s share changed between the years.",
+      "Compare only absolute numbers when the charts show percentages."
+    ],
+    "correct": 2,
+    "explanation": "Compare proportions and changes across the stated years.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "“Only the colours used.” is not a valid approach here. Compare proportions and changes across the stated years. The appropriate response is: How each category’s share changed between the years.",
+      "“Only personal opinions.” is not a valid approach here. Compare proportions and changes across the stated years. The appropriate response is: How each category’s share changed between the years.",
+      null,
+      "Use the units displayed. Percentages describe shares, and may not establish absolute totals."
+    ]
+  },
+  "writing-writing-task-1-8": {
+    "version": 2,
+    "at": 371.96,
+    "prompt": "A table compares countries at one point in time. What is useful?",
+    "options": [
+      "Identify key differences, extremes and meaningful groups.",
+      "Copy every cell without comparison.",
+      "Write a separate sentence for every cell without selecting key features.",
+      "Invent a future trend."
+    ],
+    "correct": 0,
+    "explanation": "Select and group important features instead of listing all cells.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      null,
+      "“Copy every cell without comparison.” is not a valid approach here. Select and group important features instead of listing all cells. The appropriate response is: Identify key differences, extremes and meaningful groups.",
+      "A report needs selection and comparison, not a transcription of every value.",
+      "“Invent a future trend.” is not a valid approach here. Select and group important features instead of listing all cells. The appropriate response is: Identify key differences, extremes and meaningful groups."
+    ]
+  },
+  "writing-writing-task-1-9": {
+    "version": 2,
+    "at": 335.73,
+    "prompt": "A table gives values for several years. What should you track?",
+    "options": [
+      "An unrelated example.",
+      "Assume the highest starting value must also be highest at the end.",
+      "Changes over time and important comparisons.",
+      "Only the table’s font."
+    ],
+    "correct": 2,
+    "explanation": "Time-series data supports trends as well as comparisons.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "“An unrelated example.” is not a valid approach here. Time-series data supports trends as well as comparisons. The appropriate response is: Changes over time and important comparisons.",
+      "Rankings can change over time. Check the final figures rather than assuming.",
+      null,
+      "“Only the table’s font.” is not a valid approach here. Time-series data supports trends as well as comparisons. The appropriate response is: Changes over time and important comparisons."
+    ]
+  },
+  "writing-writing-task-1-10": {
+    "version": 2,
+    "at": 317.72,
+    "prompt": "A bar chart has categories but no timeline. What can you describe?",
+    "options": [
+      "Use “increased” to compare two categories measured at the same time.",
+      "A decline over years that are not shown.",
+      "An invented cause for each bar.",
+      "Differences in values across categories."
+    ],
+    "correct": 3,
+    "explanation": "Base your description on the information actually presented.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "Increased describes change. For simultaneous categories use comparisons such as higher than.",
+      "“A decline over years that are not shown.” is not a valid approach here. Base your description on the information actually presented. The appropriate response is: Differences in values across categories.",
+      "“An invented cause for each bar.” is not a valid approach here. Base your description on the information actually presented. The appropriate response is: Differences in values across categories.",
+      null
+    ]
+  },
+  "writing-writing-task-1-11": {
+    "version": 2,
+    "at": 359.69,
+    "prompt": "Bars are shown for two years. Which statement would be relevant?",
+    "options": [
+      "The bars are attractive.",
+      "Category A increased between the two years.",
+      "The chart proves everyone was happier.",
+      "Describe a difference between years without checking the units."
+    ],
+    "correct": 1,
+    "explanation": "Describe changes that are supported by the values.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "“The bars are attractive.” is not a valid approach here. Describe changes that are supported by the values. The appropriate response is: Category A increased between the two years.",
+      null,
+      "“The chart proves everyone was happier.” is not a valid approach here. Describe changes that are supported by the values. The appropriate response is: Category A increased between the two years.",
+      "A comparison must use the correct units, such as people, percentages or money."
+    ]
+  },
+  "writing-writing-task-1-12": {
+    "version": 2,
+    "at": 419.08,
+    "prompt": "When describing mixed charts, what should your overview do?",
+    "options": [
+      "Ignore one chart completely.",
+      "Describe the chart colours.",
+      "Write about only the chart that is easier to understand.",
+      "Summarise the main features of the charts."
+    ],
+    "correct": 3,
+    "explanation": "Select important features from each visual.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "“Ignore one chart completely.” is not a valid approach here. Select important features from each visual. The appropriate response is: Summarise the main features of the charts.",
+      "“Describe the chart colours.” is not a valid approach here. Select important features from each visual. The appropriate response is: Summarise the main features of the charts.",
+      "Mixed-chart tasks require attention to all the visuals, with the main features selected from each.",
+      null
+    ]
+  },
+  "writing-writing-task-1-13": {
+    "version": 2,
+    "at": 296.77,
+    "prompt": "Two charts share a category. What can strengthen your report?",
+    "options": [
+      "Compare the related information without inventing a causal link.",
+      "Claim that two trends prove a cause-and-effect relationship.",
+      "Claim one caused the other without evidence.",
+      "Copy the question twice."
+    ],
+    "correct": 0,
+    "explanation": "A relationship in data does not automatically establish causation.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      null,
+      "Related trends alone do not establish causation. Describe the relationship without inventing causes.",
+      "“Claim one caused the other without evidence.” is not a valid approach here. A relationship in data does not automatically establish causation. The appropriate response is: Compare the related information without inventing a causal link.",
+      "“Copy the question twice.” is not a valid approach here. A relationship in data does not automatically establish causation. The appropriate response is: Compare the related information without inventing a causal link."
+    ]
+  },
+  "writing-writing-task-1-14": {
+    "version": 2,
+    "at": 375.04,
+    "prompt": "Which voice is often useful when describing a manufacturing process?",
+    "options": [
+      "Use passive voice even when it makes the sentence ungrammatical.",
+      "Only personal opinions.",
+      "Passive voice, when the action matters more than the actor.",
+      "Only direct commands."
+    ],
+    "correct": 2,
+    "explanation": "For example: the material is heated, then it is cooled.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "Passive voice is useful only when used accurately and suited to the action being described.",
+      "“Only personal opinions.” is not a valid approach here. For example: the material is heated, then it is cooled. The appropriate response is: Passive voice, when the action matters more than the actor.",
+      null,
+      "“Only direct commands.” is not a valid approach here. For example: the material is heated, then it is cooled. The appropriate response is: Passive voice, when the action matters more than the actor."
+    ]
+  },
+  "writing-writing-task-1-15": {
+    "version": 2,
+    "at": 371.02,
+    "prompt": "How should a natural process be organised in a report?",
+    "options": [
+      "Describe its stages in a logical sequence.",
+      "Rearrange stages randomly.",
+      "Give an unrelated opinion.",
+      "Invent an extra final stage to make the process sound complete."
+    ],
+    "correct": 0,
+    "explanation": "Sequence language helps readers follow the process.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      null,
+      "“Rearrange stages randomly.” is not a valid approach here. Sequence language helps readers follow the process. The appropriate response is: Describe its stages in a logical sequence.",
+      "“Give an unrelated opinion.” is not a valid approach here. Sequence language helps readers follow the process. The appropriate response is: Describe its stages in a logical sequence.",
+      "Report only the stages shown. Adding an invented stage misrepresents the process."
+    ]
+  },
+  "writing-writing-task-1-16": {
+    "version": 2,
+    "at": 428.88,
+    "prompt": "Which phrase clearly describes a map location?",
+    "options": [
+      "More and more.",
+      "To the north of the school.",
+      "Use “north of” and “left of” as interchangeable in every map.",
+      "Very nice and popular."
+    ],
+    "correct": 1,
+    "explanation": "Use precise spatial language to locate a feature.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "“More and more.” is not a valid approach here. Use precise spatial language to locate a feature. The appropriate response is: To the north of the school.",
+      null,
+      "Left depends on orientation. North is a compass direction; check the map before substituting.",
+      "“Very nice and popular.” is not a valid approach here. Use precise spatial language to locate a feature. The appropriate response is: To the north of the school."
+    ]
+  },
+  "writing-writing-task-1-17": {
+    "version": 2,
+    "at": 328.76,
+    "prompt": "A map shows an old park replaced by houses. What does this describe?",
+    "options": [
+      "A change in population proven by the map.",
+      "Claim the houses prove the exact population doubled.",
+      "A listening prediction.",
+      "A change in land use."
+    ],
+    "correct": 3,
+    "explanation": "Describe visible changes without adding unsupported information.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "“A change in population proven by the map.” is not a valid approach here. Describe visible changes without adding unsupported information. The appropriate response is: A change in land use.",
+      "A map shows land-use changes, not necessarily population figures. Do not infer an exact increase.",
+      "“A listening prediction.” is not a valid approach here. Describe visible changes without adding unsupported information. The appropriate response is: A change in land use.",
+      null
+    ]
+  },
+  "writing-writing-task-1-18": {
+    "version": 2,
+    "at": 277.7,
+    "prompt": "When comparing two maps, what should the overview identify?",
+    "options": [
+      "Focus the overview on a tiny unchanged detail.",
+      "The major changes in the area.",
+      "Every label in alphabetical order.",
+      "Your opinion of the town."
+    ],
+    "correct": 1,
+    "explanation": "The overview captures the most important transformations.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "An overview should select major transformations or broad patterns, not an isolated minor feature.",
+      null,
+      "“Every label in alphabetical order.” is not a valid approach here. The overview captures the most important transformations. The appropriate response is: The major changes in the area.",
+      "“Your opinion of the town.” is not a valid approach here. The overview captures the most important transformations. The appropriate response is: The major changes in the area."
+    ]
+  },
+  "writing-writing-task-2-19": {
+    "version": 2,
+    "at": 152.49,
+    "prompt": "What is the first planning step for Writing Task 2?",
+    "options": [
+      "Memorise an unrelated introduction.",
+      "Count all the letters.",
+      "Identify the topic and exactly what the prompt asks.",
+      "Decide on your memorised answer before reading the full question."
+    ],
+    "correct": 2,
+    "explanation": "Understanding the task prevents an off-topic response.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "“Memorise an unrelated introduction.” is not a valid approach here. Understanding the task prevents an off-topic response. The appropriate response is: Identify the topic and exactly what the prompt asks.",
+      "“Count all the letters.” is not a valid approach here. Understanding the task prevents an off-topic response. The appropriate response is: Identify the topic and exactly what the prompt asks.",
+      null,
+      "Read the full prompt first. A memorised response may fail to address the actual task."
+    ]
+  },
+  "writing-writing-task-2-20": {
+    "version": 2,
+    "at": 157.03,
+    "prompt": "What should an essay outline contain?",
+    "options": [
+      "A position, main ideas and relevant support.",
+      "Only a list of impressive words.",
+      "List examples without deciding which argument each one supports.",
+      "A copied conclusion."
+    ],
+    "correct": 0,
+    "explanation": "An outline connects your argument with the task.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      null,
+      "“Only a list of impressive words.” is not a valid approach here. An outline connects your argument with the task. The appropriate response is: A position, main ideas and relevant support.",
+      "The outline should connect evidence to main ideas and a clear position.",
+      "“A copied conclusion.” is not a valid approach here. An outline connects your argument with the task. The appropriate response is: A position, main ideas and relevant support."
+    ]
+  },
+  "writing-writing-task-2-21": {
+    "version": 2,
+    "at": 556.0,
+    "prompt": "A causes-and-solutions prompt requires which combination?",
+    "options": [
+      "Only describe a chart.",
+      "Describe the causes but omit all solutions.",
+      "Explain causes and propose relevant solutions.",
+      "Only describe effects."
+    ],
+    "correct": 2,
+    "explanation": "Address both causes and solutions explicitly.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "“Only describe a chart.” is not a valid approach here. Address both causes and solutions explicitly. The appropriate response is: Explain causes and propose relevant solutions.",
+      "The prompt asks for both. A response covering causes alone is incomplete.",
+      null,
+      "“Only describe effects.” is not a valid approach here. Address both causes and solutions explicitly. The appropriate response is: Explain causes and propose relevant solutions."
+    ]
+  },
+  "writing-writing-task-2-22": {
+    "version": 2,
+    "at": 435.13,
+    "prompt": "How should a solution relate to an identified problem?",
+    "options": [
+      "Recommend a universal solution without explaining its relevance.",
+      "It should introduce an unrelated topic.",
+      "It should repeat the introduction word for word.",
+      "It should address that problem directly."
+    ],
+    "correct": 3,
+    "explanation": "Explain the connection between the problem and the proposed response.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "Explain why the proposed action addresses the particular problem rather than making a vague recommendation.",
+      "“It should introduce an unrelated topic.” is not a valid approach here. Explain the connection between the problem and the proposed response. The appropriate response is: It should address that problem directly.",
+      "“It should repeat the introduction word for word.” is not a valid approach here. Explain the connection between the problem and the proposed response. The appropriate response is: It should address that problem directly.",
+      null
+    ]
+  },
+  "writing-writing-task-2-23": {
+    "version": 2,
+    "at": 468.0,
+    "prompt": "Where should your opinion be clear in a discussion-and-opinion essay?",
+    "options": [
+      "Only in an unrelated example.",
+      "Across the response, supported by the argument.",
+      "Nowhere in the response.",
+      "Present one opinion in the introduction and the opposite in the conclusion without explanation."
+    ],
+    "correct": 1,
+    "explanation": "Maintain a clear position while discussing both views.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "“Only in an unrelated example.” is not a valid approach here. Maintain a clear position while discussing both views. The appropriate response is: Across the response, supported by the argument.",
+      null,
+      "“Nowhere in the response.” is not a valid approach here. Maintain a clear position while discussing both views. The appropriate response is: Across the response, supported by the argument.",
+      "The reader needs a consistent position. Any qualification must be clearly explained."
+    ]
+  },
+  "writing-writing-task-2-24": {
+    "version": 2,
+    "at": 441.62,
+    "prompt": "If you fully agree with a statement, how should the essay develop?",
+    "options": [
+      "Switch positions without explanation.",
+      "Avoid addressing the statement.",
+      "Fully agree in the introduction but give only reasons for disagreement.",
+      "Present a clear position with relevant supporting reasons."
+    ],
+    "correct": 3,
+    "explanation": "Support your stated position with developed arguments.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "“Switch positions without explanation.” is not a valid approach here. Support your stated position with developed arguments. The appropriate response is: Present a clear position with relevant supporting reasons.",
+      "“Avoid addressing the statement.” is not a valid approach here. Support your stated position with developed arguments. The appropriate response is: Present a clear position with relevant supporting reasons.",
+      "Your supporting arguments should develop the position you state, or you must clarify the qualification.",
+      null
+    ]
+  },
+  "writing-writing-task-2-25": {
+    "version": 2,
+    "at": 373.26,
+    "prompt": "A prompt asks whether a development is positive or negative. What must you do?",
+    "options": [
+      "Evaluate the development and explain your judgement.",
+      "Call the development positive without explaining any benefit.",
+      "Only list vocabulary.",
+      "Summarise a table."
+    ],
+    "correct": 0,
+    "explanation": "Your evaluation should be supported by relevant reasons.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      null,
+      "A judgement needs development. Explain relevant benefits or drawbacks and how they support your evaluation.",
+      "“Only list vocabulary.” is not a valid approach here. Your evaluation should be supported by relevant reasons. The appropriate response is: Evaluate the development and explain your judgement.",
+      "“Summarise a table.” is not a valid approach here. Your evaluation should be supported by relevant reasons. The appropriate response is: Evaluate the development and explain your judgement."
+    ]
+  },
+  "writing-writing-task-2-26": {
+    "version": 2,
+    "at": 404.06,
+    "prompt": "“Do the advantages outweigh the disadvantages?” asks you to do what?",
+    "options": [
+      "Decide that three small advantages automatically outweigh one serious disadvantage.",
+      "Describe only one side without judgement.",
+      "Compare their importance and give a judgement.",
+      "Count words only."
+    ],
+    "correct": 2,
+    "explanation": "“Outweigh” is a judgement about significance, not just number.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "Outweigh concerns importance and impact, not simply the number of points.",
+      "“Describe only one side without judgement.” is not a valid approach here. “Outweigh” is a judgement about significance, not just number. The appropriate response is: Compare their importance and give a judgement.",
+      null,
+      "“Count words only.” is not a valid approach here. “Outweigh” is a judgement about significance, not just number. The appropriate response is: Compare their importance and give a judgement."
+    ]
+  },
+  "writing-writing-task-2-27": {
+    "version": 2,
+    "at": 419.45,
+    "prompt": "In a two-part essay, what should each main section achieve?",
+    "options": [
+      "Answer the relevant question with developed support.",
+      "Repeat the other section exactly.",
+      "Introduce a third unrelated question.",
+      "Assume answering one question well compensates for omitting the other."
+    ],
+    "correct": 0,
+    "explanation": "Make sure both questions receive a direct, developed answer.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      null,
+      "“Repeat the other section exactly.” is not a valid approach here. Make sure both questions receive a direct, developed answer. The appropriate response is: Answer the relevant question with developed support.",
+      "“Introduce a third unrelated question.” is not a valid approach here. Make sure both questions receive a direct, developed answer. The appropriate response is: Answer the relevant question with developed support.",
+      "Task response requires both questions to be addressed; strength in one does not remove the other."
+    ]
+  },
+  "writing-writing-task-2-28": {
+    "version": 2,
+    "at": 356.68,
+    "prompt": "Which use of complex grammar is most effective?",
+    "options": [
+      "Avoid checking the meaning.",
+      "Use structures accurately to express your meaning.",
+      "Insert complex structures even when they obscure your argument.",
+      "Use the longest sentence possible regardless of clarity."
+    ],
+    "correct": 1,
+    "explanation": "Accuracy and clarity matter more than unnecessary complexity.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "“Avoid checking the meaning.” is not a valid approach here. Accuracy and clarity matter more than unnecessary complexity. The appropriate response is: Use structures accurately to express your meaning.",
+      null,
+      "Complexity should serve clear meaning. An inaccurate or confusing structure weakens communication.",
+      "“Use the longest sentence possible regardless of clarity.” is not a valid approach here. Accuracy and clarity matter more than unnecessary complexity. The appropriate response is: Use structures accurately to express your meaning."
+    ]
+  },
+  "writing-writing-task-2-29": {
+    "version": 2,
+    "at": 480.57,
+    "prompt": "If you disagree with a statement, what should your reasons do?",
+    "options": [
+      "Support an unrelated topic.",
+      "Disagree only by repeating “I disagree” in every paragraph.",
+      "Change the question.",
+      "Support your disagreement and remain relevant to the task."
+    ],
+    "correct": 3,
+    "explanation": "Your argument should consistently develop the position you take.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "“Support an unrelated topic.” is not a valid approach here. Your argument should consistently develop the position you take. The appropriate response is: Support your disagreement and remain relevant to the task.",
+      "Repetition is not development. Provide relevant reasons and supporting explanation.",
+      "“Change the question.” is not a valid approach here. Your argument should consistently develop the position you take. The appropriate response is: Support your disagreement and remain relevant to the task.",
+      null
+    ]
+  },
+  "writing-writing-task-2-30": {
+    "version": 2,
+    "at": 350.97,
+    "prompt": "A balanced agree/disagree response still needs what?",
+    "options": [
+      "Avoid an overall judgement because you have arguments on both sides.",
+      "A clear overall position with explained qualifications.",
+      "No position at all.",
+      "Two contradictory conclusions."
+    ],
+    "correct": 1,
+    "explanation": "Nuance is compatible with a clear and consistent position.",
+    "basis": "Editorial check for the lesson topic; not a quotation from the video.",
+    "wrongReasons": [
+      "A balanced response still needs a clear overall position that explains the limits of your agreement.",
+      null,
+      "“No position at all.” is not a valid approach here. Nuance is compatible with a clear and consistent position. The appropriate response is: A clear overall position with explained qualifications.",
+      "“Two contradictory conclusions.” is not a valid approach here. Nuance is compatible with a clear and consistent position. The appropriate response is: A clear overall position with explained qualifications."
+    ]
+  }
+}

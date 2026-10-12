@@ -1,0 +1,14 @@
+:root {
+ --color-paper:oklch(98% .007 245);--color-surface:oklch(99% .004 245);--color-paper-2:oklch(95% .014 245);
+ --color-ink:oklch(26% .045 250);--color-muted:oklch(46% .03 250);--color-rule:oklch(87% .022 245);
+ --color-accent:oklch(49% .19 255);--color-accent-soft:oklch(94% .032 245);--color-focus:oklch(52% .19 255);
+ --color-rail:oklch(25% .06 255);--color-rail-hover:oklch(33% .067 255);--color-rail-muted:oklch(80% .025 245);
+ --color-mint:oklch(93% .035 175);--color-peach:oklch(95% .025 65);--color-sand:oklch(96% .024 95);
+ --color-success:oklch(38% .095 170);--color-error:oklch(43% .15 30);--color-shadow:oklch(25% .06 255 / .06);
+ --font-display:Nunito,'Segoe UI',sans-serif;--font-body:Nunito,'Segoe UI',sans-serif;--font-outlier:ui-monospace,monospace;
+ --space-3xs:4px;--space-2xs:8px;--space-xs:12px;--space-sm:16px;--space-md:24px;--space-lg:32px;--space-xl:48px;--space-2xl:64px;
+ --text-xs:12px;--text-sm:14px;--text-md:16px;--text-lg:20px;--text-xl:28px;--text-display:clamp(32px,3.5vw,48px);
+ --ease-out:cubic-bezier(.16,1,.3,1);--ease-in:cubic-bezier(.7,0,.84,0);--ease-in-out:cubic-bezier(.65,0,.35,1);--dur-short:180ms;
+ --radius-input:10px;--radius-card:16px;--radius-large:24px;--radius-pill:999px;
+ --blue:var(--color-accent);--navy:var(--color-rail);--ink:var(--color-ink);--muted:var(--color-muted);--line:var(--color-rule);--bg:var(--color-paper);
+}

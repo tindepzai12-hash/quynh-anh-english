@@ -12,6 +12,7 @@ from urllib.parse import urlparse, unquote
 
 BASE=Path(__file__).resolve().parent
 DATA=json.loads(Path(os.environ.get('OCEAN_CATALOG',str(BASE/'catalog.private.json'))).read_text(encoding='utf-8'))
+MIDPOINTS=json.loads((BASE/'deploy/midpoint-questions.json').read_text(encoding='utf-8')) if (BASE/'deploy/midpoint-questions.json').is_file() else {}
 VOCAB_REVIEWED=json.loads((BASE/'vocab-reviewed.json').read_text(encoding='utf-8'))
 QUESTION_FILE=BASE/'reading-questions.json'
 QUESTIONS=json.loads(QUESTION_FILE.read_text(encoding='utf-8')) if QUESTION_FILE.is_file() else {}
@@ -27,6 +28,7 @@ with closing(sqlite3.connect(DB)) as db, db:
 
 def public_catalog():
     d=json.loads(json.dumps(DATA))
+    d['midpointQuestions']={lid:{k:v for k,v in q.items() if k not in ('correct','explanation','wrongReasons')} for lid,q in MIDPOINTS.items()}
     d['resources']={k:{a:b for a,b in v.items() if a not in ('path','sourcePath','original','source')} for k,v in d['resources'].items()}
     d['tests']=[{k:v for k,v in t.items() if k not in ('answers','groups')} for t in d['tests']]
     for test in d['tests']:
@@ -359,6 +361,13 @@ class Handler(BaseHTTPRequestHandler):
                             part=min(remaining,minutes-used)
                             days.append(dict(date=current.isoformat(),id=lid,minutes=part,continued=remaining!=cost)); used+=part; remaining-=part
                     s['plan']=dict(minutes=minutes,start=start.isoformat(),weekdays=sorted(set(weekdays)),days=days,lessons=ids); response=s['plan']
+                elif route=='/api/midpoint-answer':
+                    lid=body.get('id'); q=MIDPOINTS.get(lid)
+                    if not q or type(body.get('choice')) is not int or not 0<=body['choice']<len(q['options']): raise ValueError('Chọn một đáp án trong câu hỏi của bài.')
+                    if body.get('version')!=q['version']: raise ValueError('Câu hỏi đã đổi. Hãy mở lại bài học.')
+                    if exams.active(s,time.time()): raise ValueError('Câu hỏi bài giảng được ẩn khi đang thi.')
+                    response=dict(id=lid,version=q['version'],choice=body['choice'],correct=body['choice']==q['correct'],key=q['options'][q['correct']],explanation=q['explanation'],whyWrong=q.get('wrongReasons',[None]*len(q['options']))[body['choice']],date=time.time())
+                    s.setdefault('midpointAnswers',{})[lid]=response
                 elif route=='/api/checkpoint':
                     lid=body.get('id'); lesson=next((l for l in DATA['lessons'] if l['id']==lid),None)
                     if not lesson or not lesson['video']: raise ValueError('Cần chọn bài có video')

@@ -1,0 +1,8 @@
+{
+  "date": "2026-10-12",
+  "font": "Nunito local, user specified",
+  "palette": "ocean blue / white",
+  "framework": "vanilla JS / Node + Python learning engine",
+  "motion": "CSS reduced-motion supported",
+  "scope": "entire app; existing route and backend ownership retained"
+}

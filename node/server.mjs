@@ -21,6 +21,7 @@ let secret=process.env.SESSION_SECRET;
 if(!secret&&!cloud){const path=root+'state/node-session.private.txt';if(!existsSync(path))writeFileSync(path,randomBytes(48).toString('base64'),{mode:0o600});secret=readFileSync(path,'utf8').trim()}
 if(!secret||secret.length<32)throw Error('SESSION_SECRET needs at least 32 characters.');
 const admin=configured?createClient(process.env.SUPABASE_URL,process.env.SUPABASE_SERVICE_ROLE_KEY,{auth:{persistSession:false,autoRefreshToken:false}}):null;
+const mediaManifest=existsSync(root+'deploy/course-media.json')?JSON.parse(readFileSync(root+'deploy/course-media.json','utf8')):{resources:{}};
 const local=cloud?null:new LocalState(process.env.OCEAN_LOCAL_DB||root+'state/learning.sqlite3');
 const persistent=admin?new CloudState(admin):null;
 if(!cloud&&!process.env.OCEAN_READING_DB)process.env.OCEAN_READING_DB=root+'state/learning-reading-content.sqlite3';
@@ -97,17 +98,27 @@ app.use('/api',async(req,res)=>{
     if(field&&result.status<400&&result.state){(result.state._fieldVersions||={})[field]=previousVersion+1;if(result.data&&typeof result.data==='object')result.data._syncVersion=previousVersion+1}
     if(result.state&&result.status<500){if(user)await persistent.write(user.id,result.state,row.version);else if(local)await local.write(result.state)}
     if(cloud&&!user&&req.path==='/catalog'){result.data.readingContent=[];result.data.quizzes={}}
+    if(req.path==='/catalog'&&result.data){for(const lesson of result.data.lessons||[])if(mediaManifest.resources[lesson.video]||(!cloud&&lesson.video&&existsSync(root+'../artifacts/course-media/videos/'+lesson.video+'.mp4')))lesson.cloudMediaAvailable=true;for(const id of Object.keys(mediaManifest.resources))if(result.data.resources[id])result.data.resources[id].cloudAvailable=true;}
     if(req.path==='/state'&&result.data){result.data._syncVersions=result.state?._fieldVersions||{};delete result.data._fieldVersions;delete result.data.guestBackups;delete result.data.guestImports}
     res.status(result.status).json(result.data);
   });
 });
 app.get('/media/:id',async(req,res)=>{
-  if(cloud)return res.status(404).json({error:'Video và PDF gốc vẫn nằm trên laptop, chưa được đưa lên cloud.'});
   const data=JSON.parse(readFileSync(process.env.OCEAN_CATALOG||root+'catalog.private.json','utf8'));const resource=data.resources[req.params.id];
   if(!resource||data.tests.some(t=>t.answer===req.params.id)||/ANSWER/i.test(resource.original||''))return res.status(403).end();
-  if(!existsSync(resource.path))return res.status(404).end();
-  const user=await identify(req);const current=user?await persistent.read(user.id):await local.read();const active=[...Object.values(current.body.exams||{}),...Object.values(current.body.writingExams||{}),...Object.values(current.body.readingSessions||{})].some(e=>e.mode==='exam'&&!e.submitted&&e.deadline>Date.now()/1000);
+  const user=await identify(req);if(cloud&&!user)return res.status(401).json({error:'Đăng nhập để xem bài giảng.'});
+  const current=user?await persistent.read(user.id):await local.read();const active=[...Object.values(current.body.exams||{}),...Object.values(current.body.writingExams||{}),...Object.values(current.body.readingSessions||{})].some(e=>e.mode==='exam'&&!e.submitted&&e.deadline>Date.now()/1000);
   if(active)return res.status(403).json({error:'Học liệu hỗ trợ được ẩn khi đang thi.'});
+  const media=mediaManifest.resources[req.params.id];
+  if(cloud){
+    if(!media||!admin)return res.status(404).json({error:'Tài liệu này chưa có trong kho online.'});
+    const {data:signed,error}=await admin.storage.from(mediaManifest.bucket).createSignedUrl(media.object,14400);
+    if(error||!signed?.signedUrl)return res.status(503).json({error:'Kho video chưa trả lời. Hãy thử tải lại.'});
+    res.set('Cache-Control','private, no-store');return res.redirect(307,signed.signedUrl);
+  }
+  const prepared=fileURLToPath(new URL('../../artifacts/course-media/videos/'+req.params.id+'.mp4',import.meta.url));
+  if(existsSync(prepared))return res.sendFile(prepared);
+  if(!resource.path||!existsSync(resource.path))return res.status(404).json({error:'Chưa tìm thấy video trên laptop.'});
   res.sendFile(resource.path);
 });
 app.get('/quynh-anh-media/:file',async(req,res)=>{
