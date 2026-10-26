@@ -25,6 +25,19 @@ export function settleOnBed(model,bed){
  model.updateMatrixWorld(true);
  const body=new THREE.Box3(),head=new THREE.Box3();model.traverse(o=>{
   if(!o.isSkinnedMesh||!o.visible)return;o.skeleton.update();
+  if(model.userData.studioModel&&o.material.name.includes('Original-PBR')){
+   // Source-space anatomy excludes the curved tail and fins from support.
+   // Bone-weight ranges alone include blended tail/socket vertices.
+   const positions=o.geometry.attributes.position,point=new THREE.Vector3();
+   for(let i=0;i<positions.count;i++){
+    const x=positions.getX(i),y=positions.getY(i),z=positions.getZ(i);
+    const isHead=y>.96&&Math.abs(x)<.60&&z>-.42;
+    const isTorso=y>.25&&y<.82&&Math.abs(x)<.35&&z>-.30;
+    if(!isHead&&!isTorso)continue;
+    o.getVertexPosition(i,point).applyMatrix4(o.matrixWorld);
+    if(isHead)head.expandByPoint(point);else body.expandByPoint(point);
+   }
+  }
   if(o.name==='Retopology_Body')body.expandByObject(o,true);
   if(o.name==='Retopology_Head')head.expandByObject(o,true);
  });

@@ -15,3 +15,7 @@
 
 .justin-interaction-panel .pet-reactions{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}.justin-interaction-panel .pet-reactions .pill{display:flex;align-items:center;justify-content:center;gap:6px;min-width:0;padding:10px 5px;font-size:11px}.pet-reactions .pill svg{width:17px;height:17px;flex:none}.pet-reactions .pill span{white-space:nowrap}
 @media(max-width:650px){.justin-interaction-panel .pet-reactions .pill{flex-direction:column;gap:3px;padding:7px 3px;font-size:10px;min-height:53px}}
+
+/* Keep model controls usable with the additional garment switch. */
+.pet-keyboard button{min-height:44px}.justin-interaction-panel .pill{min-height:44px}
+@media(max-width:700px){.justin-corner{min-height:740px}.justin-stage{bottom:245px}.pet-keyboard{gap:2px 12px}}

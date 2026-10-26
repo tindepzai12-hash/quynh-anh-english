@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-26T07:18:47.939Z",
+  "assets": {
+    "clipNames": [
+      "Justin_Idle",
+      "Justin_Listening",
+      "Justin_LookAround",
+      "Justin_Nod",
+      "Justin_Wave"
+    ],
+    "vestParts": 2,
+    "blink": 1
+  },
+  "mouth": [
+    0.28,
+    0.28,
+    0.28,
+    0.28,
+    0.28,
+    0.28
+  ],
+  "disposal": {
+    "canvas": 0,
+    "stable": true,
+    "voiceDisposed": true
+  },
+  "errors": [],
+  "checks": [
+    "Feed reaches mouth and emits contact",
+    "All mouth primitives close together during speech",
+    "Shader and geometry blink reach closed endpoint",
+    "Disposal removes canvas and stops rendering/voice"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-26T07:17:58.417Z",
+  "base": "http://127.0.0.1:8780",
+  "checks": [
+    "Actual pet page loads studio v39 with five clips",
+    "Vest equip/remove and reload persistence",
+    "Sleep opens bed, wake restores idle",
+    "Petting contact effect",
+    "Belly contact effect",
+    "Ball intersects the new body surface: right-cheek",
+    "390px mobile: no horizontal overflow, garment button >=44px",
+    "All five real motion clips selected and played",
+    "Five views captured from actual exported GLB"
+  ],
+  "errors": []
+}

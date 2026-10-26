@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {studioBounds,studioLandmark} from './StudioModel.js?v=39';
 
 export function visibleInTree(o){for(;o;o=o.parent)if(!o.visible)return false;return true;}
 export function classifyFace(x,y){
@@ -20,10 +21,10 @@ export class BodySurface {
  constructor(controller){this.c=controller;this.ray=new THREE.Raycaster();this.ndc=new THREE.Vector2();}
  update(){this.c.model.updateMatrixWorld(true);this.c.model.traverse(o=>{if(o.isSkinnedMesh&&visibleInTree(o)){o.skeleton.update();o.computeBoundingSphere();}});}
  hits(ray){this.update();return ray.intersectObject(this.c.model,true).filter(h=>visibleInTree(h.object));}
- region(hit){const n=hit.object.name;if(/Forelock|Hair/.test(n))return 'hair';if(/Belly|Torso|Body|Outfit_/.test(n))return 'belly';if(/Hand|Arm/.test(n))return 'hand';if(/Mouth|Tongue|Tooth/.test(n))return 'mouth';if(/Nostril|Muzzle|Nose/.test(n))return 'nose';
+ region(hit){const n=hit.object.name;if(this.c.studioModel){if(/Tooth|Tongue/.test(n))return 'mouth';if(hit.object.material?.name.includes('Sailor-'))return 'belly';const box=studioBounds(this.c.model),f=box.getParameter(hit.point,new THREE.Vector3());if(f.y<.54)return 'belly';if(f.y>.87)return 'forehead';return classifyFace(f.x,(f.y-.54)/.34);}if(/Forelock|Hair/.test(n))return 'hair';if(/Belly|Torso|Body|Outfit_/.test(n))return 'belly';if(/Hand|Arm/.test(n))return 'hand';if(/Mouth|Tongue|Tooth/.test(n))return 'mouth';if(/Nostril|Muzzle|Nose/.test(n))return 'nose';
  const head=this.c.model.getObjectByName('Retopology_Head');if(/Head|Eye|Brow|Lid|Pupil/.test(n)&&head){const p=head.worldToLocal(hit.point.clone());head.geometry.computeBoundingBox();const b=head.geometry.boundingBox;const f=b.getParameter(p,new THREE.Vector3());return classifyFace(f.x,f.y);}return 'body';}
  pick(x,y){const r=this.c.host.getBoundingClientRect();this.ndc.set((x-r.left)/r.width*2-1,-(y-r.top)/r.height*2+1);this.ray.setFromCamera(this.ndc,this.c.camera);const h=this.hits(this.ray)[0];return h?{...h,region:this.region(h),anchor:new SurfaceAnchor(h)}:null;}
  pointOnPlane(x,y,z){const r=this.c.host.getBoundingClientRect();this.ndc.set((x-r.left)/r.width*2-1,-(y-r.top)/r.height*2+1);this.ray.setFromCamera(this.ndc,this.c.camera);return this.ray.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0,0,1),-z),new THREE.Vector3());}
  segment(from,to){const delta=to.clone().sub(from),distance=delta.length();if(distance<1e-8)return null;const ray=new THREE.Raycaster(from,delta.normalize(),0,distance+.10);const h=this.hits(ray)[0];return h?{...h,region:this.region(h),anchor:new SurfaceAnchor(h)}:null;}
- mouthNear(x,y){const mouth=this.c.model.getObjectByName('Mouth');if(!mouth)return false;const box=new THREE.Box3().setFromObject(mouth);const center=box.getCenter(new THREE.Vector3());const p=this.pointOnPlane(x,y,center.z);return !!p&&box.expandByScalar(.13).containsPoint(p);}
+ mouthNear(x,y){if(this.c.studioModel){const center=studioLandmark(this.c.model,'mouth'),p=this.pointOnPlane(x,y,center.z);return !!p&&Math.abs(p.x-center.x)<.25&&Math.abs(p.y-center.y)<.20;}const mouth=this.c.model.getObjectByName('Mouth');if(!mouth)return false;const box=new THREE.Box3().setFromObject(mouth);const center=box.getCenter(new THREE.Vector3());const p=this.pointOnPlane(x,y,center.z);return !!p&&box.expandByScalar(.13).containsPoint(p);}
 }

@@ -1,0 +1,15 @@
+{
+  "body": "v39",
+  "garment": "v22",
+  "publishedBy": "incremental web integration requested by user",
+  "fullStudioAcceptance": false,
+  "bytes": 9406504,
+  "sha256": "65611373ffda24a7cd352bc8e63066ff2ff7ad686151ee374114d266f707501b",
+  "clips": [
+    "Justin_Idle",
+    "Justin_Listening",
+    "Justin_LookAround",
+    "Justin_Nod",
+    "Justin_Wave"
+  ]
+}
